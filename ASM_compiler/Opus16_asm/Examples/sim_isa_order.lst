@@ -1,0 +1,112 @@
+0000   0000   main: nop ; 
+0001   2101   lb_arith: add r1,r2 ; 
+0002   4302   adc r3,r4 ; 
+0003   0503   addv r5,'h1234 ; 
+0004   1234
+0005   0604   addrp r6,p0 ; 
+0006   8705   sub r7,r8 ; 
+0007   a906   sbb r9,ra ; 
+0008   0b07   subv rB,'h0001 ; 
+0009   0001
+000a   1c08   subrp rC,p1 ; 
+000b   dd09   lb_logic: not rD ; 
+000c   d109   not rD,r1 ; 
+000d   fe0a   and rE,rF ; 
+000e   010b   andv r1,'hffff ; 
+000f   ffff
+0010   120c   or r2,r1 ; 
+0011   030d   orv r3,'h1010 ; 
+0012   1010
+0013   540e   xor r4,r5 ; 
+0014   060f   xorv r6,'h1010 ; 
+0015   1010
+0016   0710   inc r7 ; 
+0017   0811   dec r8 ; 
+0018   a912   cmpr r9,rA ; 
+0019   bb13   cmprv rb,'h0000 ; 
+001a   0000
+001b   2c14   cmprp rc,p2 ; 
+001c   0115   shl r1 ; 
+001d   0216   shr r2 ; 
+001e   0317   shl4 r3 ; 
+001f   0318   shr4 r3 ; 
+0020   3419   lb_move: mvrr r3,r4 ; 
+0021   441a   mvrp r4,p4 ; 
+0022   471b   mvpr p4,r7 ; 
+0023   451c   mvpp p4,p5 ; 
+0024   341d   swap r3,r4 ; 
+0025   431e   swapp r4,p3 ; 
+0026   001f   lb_load: ldcv c0,3 ; 
+0027   0003
+0028   9143   ldc c1,r9 ; 
+0029   0120   ldr r1,temp0 ; 
+002a   006d
+002b   0221   ldrv r2,'h0003 ; 
+002c   0003
+002d   1322   ldrp r3,p1 ; 
+002e   1423   ldrx r4,p1,2 ; 
+002f   0002
+0030   2524   ldrpi r5,p2 ; 
+0031   3625   ldrpd r6,p3 ; 
+0032   4725   pull r7,p4 ; 
+0033   5825   pop r8,p5 ; 
+0034   2026   ldmam m2 ; 
+0035   0027   ldpagv 'haba ; 
+0036   0aba
+0037   9042   ldpag r9 ; 
+0038   6028   lb_store: str r6,temp0 ; 
+0039   006d
+003a   1429   strp r1,p4 ; 
+003b   242a   strx r2,p4,2 ; 
+003c   0002
+003d   352b   strpi r3,p5 ; 
+003e   a82b   push ra,p8 ; 
+003f   b92c   strpd rB,p9 ; 
+0040   0a2d   lb_pointer: ldp pa,tempa ; 
+0041   006e
+0042   0b2e   ldpv pb,temp0 ; 
+0043   006d
+0044   bc44   ldpy pc,rb ; 
+0045   d02f   stp pd,tempa ; 
+0046   006e
+0047   0e30   incp pE ; 
+0048   0f31   decp pf ; 
+0049   0132   lb_io: inp r1,port1 ; 
+004a   0073
+004b   c233   inpp r2,pc ; 
+004c   3034   outp r3,port2 ; 
+004d   0074
+004e   4d35   outpp r4,pd ; 
+004f   0037   main1: bra main1 ; 
+0050   ffff
+0051   0036   main2: dcjz c0,main2 ; 
+0052   0051
+0053   0138   main3: dcjnz c1,main3 ; 
+0054   0053
+0055   0039   jmp main4 ; 
+0056   0057
+0057   0139   main4: jmp f1,main5 ; 
+0058   0059
+0059   8a39   main5: jmp tA,main6 ; 
+005a   005b
+005b   0e3a   main6: jmpp pe ; 
+005c   003b   main7: jsr subr1 ; 
+005d   005e
+005e   003c   subr1: rts ; 
+005f   003d   rti ; 
+0060   8e3e   lb_bits: uflag tE ; 
+0061   0f3e   uflag ff ; 
+0062   8a3f   uport ta ; 
+0063   0b3f   uport fB ; 
+0064   2140   bit r1,r2 ; 
+0065   0341   bitv r3,'h0011 ; 
+0066   0011
+0067   0046   lb_irq: cli ; 
+0068   0045   sei ; 
+0069   0047   swia: swi swia ; 
+006a   0069
+006b   005a   hwi ; 
+006c   00ff   stop ; 
+006d   0021   temp0: dw 33 ; 
+0073   0100   port1: dw 'h0100 ; 
+0074   0108   port2: dw 'h0108 ; 

@@ -1,0 +1,170 @@
+*****************************************
+Assembler and Date    : version 6.1: (11-09-21)
+Program size          : 112
+----------
+Asm  file name        : test_basic_functions.asm
+List file name        : test_basic_functions.lst
+----------
+       Hex  file name : test_basic_functions.hex
+       COE  file name : test_basic_functions.coe
+       MEM  file name : test_basic_functions.mem
+Altera Mif  file name : test_basic_functions_alt.mif
+Xilinx Mif  file name : test_basic_functions_xil.mif
+*****************************************
+
+Labels and Defines:
+             CR: 000d 
+           CTLD: 0004 
+           CTLE: 0005 
+           CTLI: 0009 
+           CTLL: 000c 
+           CTLP: 0010 
+           CTLR: 0012 
+           CTLS: 0013 
+           CTLX: 0003 
+           CTLZ: 001a 
+           CTL_: 001f 
+            ESC: 001b 
+            ETX: 0003 
+             FF: 000c 
+             LF: 000a 
+           NULL: 0000 
+            SPC: 0020 
+   STACK_LENGTH: 0040 
+            end: 000b 
+           main: 0000 
+      myasc2hex: 004b 
+       mydivend: 0030 
+     mydivision: 0028 
+     mydivstart: 0029 
+         myhex1: 003a 
+         myhex2: 0047 
+      myhex2asc: 0031 
+     mynextchar: 0021 
+      myrd_hex2: 0060 
+      myrd_hex9: 0061 
+          stack: 0080 
+           temp: 0070 
+          temp1: 0062 
+          temp2: 0063 
+          temp3: 0064 
+          temp4: 0065 
+          temp5: 0066 
+          temp6: 0067 
+        tempsrc: 0068 
+      testbasic: 000d 
+*****************************************
+Opcode listing.
+
+0000   0f2e   main: ldpv pF,stack ; 
+0001   0080
+0002   0d2e   ldpv pD,temp ; 
+0003   0070
+0004   012e   ldpv p1,tempsrc ; 
+0005   0068
+0006   893f   uport t9 ; 
+0007   093f   uport f9 ; 
+0008   003b   jsr testbasic ;
+0009   000d
+000a   00ff   stop ; 
+000b   0039   end: jmp main ;
+000c   0000
+000d   0000   testbasic: nop ; 
+000e   0521   ldrv r5,17 ; 
+000f   0011
+0010   0421   ldrv r4,3 ; 
+0011   0003
+0012   003b   jsr mydivision ; 
+0013   0028
+0014   6d2b   strpi r6,pD ;
+0015   3d2b   strpi r3,pD ;
+0016   0221   ldrv r2,'h00aE ; 
+0017   00ae
+0018   003b   jsr myhex2asc ; 
+0019   0031
+001a   4d2b   strpi r4,pD ;
+001b   3d2b   strpi r3,pD ;
+001c   012e   ldpv p1,tempsrc ; 
+001d   0068
+001e   220e   xor r2,r2 ; 
+001f   011f   ldcv c1,7 ; 
+0020   0007
+0021   1124   mynextchar: ldrpi r1,p1 ; 
+0022   003b   jsr myasc2hex ;
+0023   004b
+0024   0138   dcjnz c1,mynextchar ; 
+0025   0021
+0026   2d2b   strpi r2,pD ; 
+0027   003c   rts ; 
+0028   660e   mydivision: xor r6,r6 ; 
+0029   4505   mydivstart: sub r5,r4 ; 
+002a   3037   bra s,mydivend ; 
+002b   0005
+002c   5319   mvrr r5,r3 ; 
+002d   0610   inc r6 ; 
+002e   0037   bra mydivstart ; 
+002f   fffa
+0030   003c   mydivend: rts ; 
+0031   2f2b   myhex2asc: push r2,pF ; 
+0032   020b   andv r2,'h00F ; 
+0033   000f
+0034   2213   cmprv r2,'h00A ; 
+0035   000a
+0036   d037   bra lt,myhex1 ; 
+0037   0003
+0038   0203   addv r2,'h007 ; 
+0039   0007
+003a   0203   myhex1: addv r2,'h030 ; 
+003b   0030
+003c   2319   mvrr r2,r3 ; 
+003d   f225   pull r2,pF ; 
+003e   0218   shr4 r2 ; 
+003f   020b   andv r2,'h00F ; 
+0040   000f
+0041   2213   cmprv r2,'h00A ; 
+0042   000a
+0043   d037   bra lt,myhex2 ; 
+0044   0003
+0045   0203   addv r2,'h007 ; 
+0046   0007
+0047   0203   myhex2: addv r2,'h030 ; 
+0048   0030
+0049   2419   mvrr r2,r4 ; 
+004a   003c   rts ; 
+004b   1113   myasc2hex: cmprv r1,CR ; 
+004c   000d
+004d   1037   bra z,myrd_hex9 ; 
+004e   0013
+004f   1113   cmprv r1,LF ; 
+0050   000a
+0051   1037   bra z,myrd_hex9 ; 
+0052   000f
+0053   0107   subv r1,'h030 ; 
+0054   0030
+0055   3037   bra s,myrd_hex9 ; 
+0056   000b
+0057   0217   shl4 r2 ; 
+0058   1113   cmprv r1,9 ; 
+0059   0009
+005a   f037   bra ls,myrd_hex2 ; 
+005b   0005
+005c   010b   andv r1,'h00F ; 
+005d   000f
+005e   0103   addv r1,9 ; 
+005f   0009
+0060   120c   myrd_hex2: or r2,r1 ; 
+0061   003c   myrd_hex9: rts ; 
+0062   0000   temp1: dw 0 ; 
+0063   0001   temp2: dw 1 ;
+0064   0002   temp3: dw 2 ;
+0065   0003   temp4: dw 3 ;
+0066   0004   temp5: dw 4 ;
+0067   000d   temp6: dw 13 ; 
+0068   0030   tempsrc: dw '0' ; 
+0069   0031   dw '1' ;
+006a   0032   dw '2' ;
+006b   0033   dw '3' ;
+006c   0034   dw '4' ;
+006d   000d   dw 'h000d ; 
+006e   0000   dw 'h0000 ;
+006f   0000   dw 'h0000 ;

@@ -1,0 +1,299 @@
+*****************************************
+Assembler and Date    : version 6.1: (11-09-21)
+Program size          : 789
+----------
+Asm  file name        : sim_isa.asm
+List file name        : sim_isa.lst
+----------
+       Hex  file name : sim_isa.hex
+       COE  file name : sim_isa.coe
+       MEM  file name : sim_isa.mem
+Altera Mif  file name : sim_isa_alt.mif
+Xilinx Mif  file name : sim_isa_xil.mif
+*****************************************
+
+Labels and Defines:
+    BOOT_LOADER: 03ff 
+             CR: 000d 
+           CTLP: 0010 
+           CTLR: 0012 
+           CTLS: 0013 
+           CTLX: 0003 
+            ESC: 001b 
+             FF: 000c 
+            IRW: 0000 
+             LF: 000a 
+     MAIN_ENTRY: 0050 
+           NULL: 0000 
+       RAM_SIZE: 0010 
+    RESET_ENTRY: 0000 
+     STACK_SIZE: 000a 
+         VALUE1: 0055 
+         VALUE2: 1234 
+            XRD: 0001 
+            XRW: 0003 
+            XWR: 0002 
+        enddead: 00ee 
+        endmain: 00e8 
+        endprog: 00e9 
+        int1cnt: 030c 
+        int2cnt: 030d 
+        int3cnt: 030e 
+        int4cnt: 030f 
+           irq1: 00fc 
+           irq2: 00fe 
+           irq3: 0100 
+           irq4: 0102 
+          irq_1: 0002 
+          irq_2: 0004 
+          irq_3: 0006 
+          irq_4: 0008 
+        jmpp_pb: 00f9 
+           main: 0050 
+          main1: 007d 
+          main2: 00d4 
+         main21: 00f3 
+          main3: 00d6 
+          main4: 00da 
+         main41: 00f5 
+          main5: 00dc 
+         main51: 00f7 
+          main6: 00dd 
+        reset_v: 0000 
+          stack: 0335 
+         stemp0: 0315 
+         stemp1: 0325 
+          subr1: 00fb 
+           swia: 0104 
+        swiacnt: 030b 
+          temp0: 0300 
+          temp1: 0301 
+          temp2: 0302 
+          temp3: 0303 
+          temp4: 0304 
+          temp5: 0305 
+          temp6: 0306 
+          temp7: 0307 
+          temp8: 0308 
+          temp9: 0309 
+          tempa: 030a 
+         xtemp0: 0310 
+         xtemp1: 0311 
+         xtemp2: 0312 
+         xtemp3: 0313 
+         xtemp4: 0314 
+*****************************************
+Opcode listing.
+
+0000   0039   reset_v: jmp main ;
+0001   0050
+0002   0039   irq_1: jmp irq1 ;
+0003   00fc
+0004   0039   irq_2: jmp irq2 ;
+0005   00fe
+0006   0039   irq_3: jmp irq3 ;
+0007   0100
+0008   0039   irq_4: jmp irq4 ;
+0009   0102
+0050   0046   main: cli ; 
+0051   0f2e   ldpv pF,stack ; 
+0052   0335
+0053   010e   xor r1 ;
+0054   020e   xor r2 ;
+0055   030e   xor r3 ;
+0056   040e   xor r4 ;
+0057   070e   xor r7 ;
+0058   080e   xor r8 ;
+0059   090e   xor r9 ;
+005a   012e   ldpv p1,temp0 ;
+005b   0300
+005c   022e   ldpv p2,temp5 ;
+005d   0305
+005e   032e   ldpv p3,0 ;
+005f   0000
+0060   042e   ldpv p4,temp0 ;
+0061   0300
+0062   052e   ldpv p5,temp5 ;
+0063   0305
+0064   062e   ldpv p6,0 ;
+0065   0000
+0066   072e   ldpv p7,temp0 ;
+0067   0300
+0068   082e   ldpv p8,temp5 ;
+0069   0305
+006a   092e   ldpv p9,0 ;
+006b   0000
+006c   0a2e   ldpv pa,0 ;
+006d   0000
+006e   0b2e   ldpv pb,0 ;
+006f   0000
+0070   0c2e   ldpv pc,xtemp0 ;
+0071   0310
+0072   0d2e   ldpv pd,xtemp1 ;
+0073   0311
+0074   0e2e   ldpv pe,jmpp_pb ;
+0075   00f9
+0076   5034   outp r5,xtemp0 ;
+0077   0310
+0078   5034   outp r5,xtemp1 ;
+0079   0311
+007a   031f   ldcv c3,80 ;
+007b   0050
+007c   0045   sei;  
+007d   0000   main1: nop ;
+007e   2101   add r1,r2 ;
+007f   2102   adc r1,r2 ;
+0080   0103   addv r1,'h1234 ;
+0081   1234
+0082   3104   addrp r1,p3 ;
+0083   4305   sub r3,r4 ;
+0084   4306   sbb r3,r4 ;
+0085   0307   subv r3,'h0001 ;
+0086   0001
+0087   3308   subrp r3,p3 ;
+0088   0009   not ; 
+0089   210a   and r1,r2 ;
+008a   010b   andv r1,'hffff ;
+008b   ffff
+008c   120c   or r2,r1 ;
+008d   030d   orv r3,'h1010 ;
+008e   1010
+008f   120e   xor r2,r1 ;
+0090   030f   xorv r3,'h1010 ;
+0091   1010
+0092   0110   inc r1 ;
+0093   0211   dec r2 ;
+0094   2112   cmpr r1,r2 ;
+0095   3313   cmprv r3,'h0000 ;
+0096   0000
+0097   1114   cmprp r1,p1 ;
+0098   0115   shl r1 ;
+0099   0115   shl l,r1 ;
+009a   1215   shl k,r2 ;
+009b   3315   shl r,r3 ;
+009c   2415   shl a,r4 ;
+009d   0a16   shr ra ;
+009e   0b16   shr l,rb ;
+009f   1c16   shr k,rc ;
+00a0   2d16   shr a,rd ;
+00a1   3e16   shr r,re ;
+00a2   0317   shl4 r3 ;
+00a3   0318   shr4 r3 ;
+00a4   1419   mvrr r1,r4 ;
+00a5   241a   mvrp r2,p4 ;
+00a6   471b   mvpr p4,r7 ;
+00a7   451c   mvpp p4,p5 ;
+00a8   341d   swap r3,r4 ;
+00a9   431e   swapp r4,p3 ;
+00aa   001f   ldcv c0,3 ;
+00ab   0003
+00ac   9143   ldc c1,r9 ;
+00ad   0120   ldr r1,temp0 ;
+00ae   0300
+00af   0221   ldrv r2,'h0003 ;
+00b0   0003
+00b1   1322   ldrp r3,p1 ;
+00b2   1423   ldrx r4,p1,2 ;
+00b3   0002
+00b4   1524   ldrpi r5,p1 ;
+00b5   1625   ldrpd r6,p1 ;
+00b6   0026   ldmam m0 ;
+00b7   0027   ldpagv 'haba ;
+00b8   0aba
+00b9   6042   ldpag r6 ;
+00ba   6028   str r6,temp0 ;
+00bb   0300
+00bc   1429   strp r1,p4 ;
+00bd   242a   strx r2,p4,2 ;
+00be   0002
+00bf   352b   strpi r3,p5 ;
+00c0   252c   strpd r2,p5 ;
+00c1   0a2d   ldp pa,tempa ;
+00c2   030a
+00c3   0b2e   ldpv pb,temp0 ;
+00c4   0300
+00c5   0b21   ldrv rb,2 ;
+00c6   0002
+00c7   bb44   ldpy pb,rb ;
+00c8   b02f   stp pb,tempa ;
+00c9   030a
+00ca   0a30   incp pa ;
+00cb   0b31   decp pb ;
+00cc   0132   inp r1,xtemp0 ;
+00cd   0310
+00ce   c233   inpp r2,pc ;
+00cf   3034   outp r3,xtemp1 ;
+00d0   0311
+00d1   4d35   outpp r4,pd ;
+00d2   0037   bra main21 ;
+00d3   0020
+00d4   0036   main2: dcjz c0,main2 ;
+00d5   00d4
+00d6   0138   main3: dcjnz c1,main3 ;
+00d7   00d6
+00d8   0039   jmp main41 ;
+00d9   00f5
+00da   0139   main4: jmp f1,main51 ;
+00db   00f7
+00dc   0e3a   main5: jmpp pe ;
+00dd   003b   main6: jsr subr1 ;
+00de   00fb
+00df   823e   uflag t2 ;
+00e0   833f   uport t3 ;
+00e1   2140   bit r1,r2 ;
+00e2   0341   bitv r3,'h0011 ;
+00e3   0011
+00e4   0047   swi swia ;
+00e5   0104
+00e6   0338   dcjnz c3,main1 ;
+00e7   007d
+00e8   0046   endmain: cli ;
+00e9   0027   endprog: ldpagv 'hb0b0 ; 
+00ea   b0b0
+00eb   00ff   stop ;
+00ec   0039   jmp endprog ; 
+00ed   00e9
+00ee   0027   enddead: ldpagv 'hdead ; 
+00ef   dead
+00f0   00ff   stop ;
+00f1   0039   jmp enddead ; 
+00f2   00ee
+00f3   0039   main21: jmp main2 ;
+00f4   00d4
+00f5   0037   main41: bra main4 ;
+00f6   ffe4
+00f7   0037   main51: bra main5 ;
+00f8   ffe4
+00f9   0039   jmpp_pb: jmp main6 ;
+00fa   00dd
+00fb   003c   subr1: rts ;
+00fc   0c10   irq1: inc rc ;
+00fd   003d   rti;  
+00fe   0d10   irq2: inc rd ;
+00ff   003d   rti;  
+0100   0e10   irq3: inc re ;
+0101   003d   rti;  
+0102   0f10   irq4: inc rf ;
+0103   003d   rti;  
+0104   003d   swia: rti;
+0300   1234   temp0: dw 'h1234;
+0301   1111   temp1: dw 'h1111;
+0302   2222   temp2: dw 'h2222;
+0303   3333   temp3: dw 'h3333;
+0304   4444   temp4: dw 'h4444;
+0305   5555   temp5: dw 'h5555;
+0306   6666   temp6: dw 'h6666;
+0307   7777   temp7: dw 'h7777;
+0308   8888   temp8: dw 'h8888;
+0309   9999   temp9: dw 'h9999;
+030a   0300   tempa: dw temp0;
+030b   0000   swiacnt: dw 0 ;
+030c   0000   int1cnt: dw 0 ;
+030d   0000   int2cnt: dw 0 ;
+030e   0000   int3cnt: dw 0 ;
+030f   0000   int4cnt: dw 0 ;
+0310   0000   xtemp0: dw 0 ;
+0311   0000   xtemp1: dw 0 ;
+0312   0000   xtemp2: dw 0 ;
+0313   0000   xtemp3: dw 0 ;
+0314   0000   xtemp4: dw 0 ;

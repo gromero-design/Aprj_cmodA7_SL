@@ -1,0 +1,342 @@
+//////////////////////////////////////////////////////////////////////
+// Opcode table for Opus1 processor.
+//////////////////////////////////////////////////////////////////////
+//                                                                     
+//    Copyright 2002  Guillermo Romero, 
+//    Winthrop, MA 02152
+//    All rights reserved.                                 
+//                                                                     
+//----------------------------------------------------------------------###
+//   
+
+//    File Name:  opus1_asm.tab
+//         Date:  Jan 1st, 2002 
+//        Model:  Table
+//    Simulator:  none
+//    Synthesis:  none
+//          P&R:  none
+//       Script:  PERL
+//----------------------------------------------------------------------###
+//
+//       Author:  Gill Romero 
+//        Email:  romero@ieee.org
+//        Phone:  617-846-1655
+//      Company:  Mutant Technology
+//
+// Modified:
+// 06/01/19 added bit and bitv (bit test)
+// 02/11/21 added page_src control for load page address register
+// 02/20/21 added lc_src control for load counter register
+// 02/20/21 added 4 new instructions
+//			LDPY = ldpy p#,r# = p# = (p#+r#) --new
+//			LDPAGV (before LDPAG) = ldpag value --old, new name
+//			LDPAG = ldpag r# --new
+//			LDCV (before LDC), ldcv c#,value --old , new name
+//			LDC  = ldc c#,r# --new
+//			DCJZ = dcjz c#,address --new
+// 05/26/21 fixed the following instructions:
+//			MVRP, MVPP, SWAPP, LDRPI,LDRPD,STRPI,STRPD,LDPY
+// 08/10/21 Added sei and cli instructions 
+// 11-09-21 Added mM field, now is rRpPcCmM
+
+//----------------------------------------------------------------------###
+// Description:
+// Instruction set definition for PERL script
+// Changes must be done in opus1_iset.v
+//////////////////////////////////////////////////////////////////////
+// field: (column)
+//       nemonic, is a n characters (max 8) word.
+//       opcode,  is an 8 bits hex number.
+//       words,   number of words taken for the instruction.
+//
+//       order,   indicates the order of the register field.
+//       t#; or f#;       // true or false for user flags
+//       c#; or c#,value; // counter
+//       r#; or r#,value; // register
+//       p#; or p#,value; // pointer
+//       m#;              // memory access
+//                0: src,0
+//                1: 0,dst
+//                2,3,4: src,src
+//
+//       r1,r2; or r1,r2,value;
+//       r1,p2; or r1,p2,value;
+//                0,2: rsrc,rdst
+//                1,3: rdst,rsrc
+//                4:   src,src
+//
+//                5: (copy value into reg field src/dst)
+//                6: (copy value into mod field)
+//
+// register address field definition for 16 bits:
+// instruction length              = 16 bits (15:0 )
+// register or pointer source      =  4 bits (15:12)
+// register or pointer destination =  4 bits (11:8 )
+// opcode modifier                 =  2 bits ( 7:6 )
+// basic opcode                    =  6 bits ( 5:0 )
+// extended opcode                 =  4 bits (15:8 )
+// _______________________________________________________________
+//| 1 | 1 | 1 | 1 | 1 | 1 |   |   |   |   |   |   |   |   |   |   |
+//| 5 | 4 | 3 | 2 | 1 | 0 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+//|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|
+//|      s r c    |      d s t    |  mod  |        opcode         |
+//|_______________|_______|_______|_______|_______________________|
+//|           e x t e n d e d     |  mod  |        opcode         |
+//|_______________________________|_______|_______________________|
+// mam : memory access mode register (destination)
+// cn  : loop counter (destination or source)
+// rg  : register (destination or source)
+// rd  : register destination
+// rs  : register source
+// pt  : register pointer (destination or source)
+// pd  : register pointer destination
+// ps  : register pointer source
+// (pt): register pointer is an address. (destination or source)
+// (pd): register pointer destination is an address
+// (ps): register pointer source is an address
+// (addr) : effective address content.
+// cy  : carry or borrow
+// val : inmediate value
+// #   : single digit value
+// ~   : conditional not
+// []  : option
+//
+// cond:
+//      `RFLD = 4'b0000  BRA always : 'h0E0 , bra label;
+//      `RFLD = 4'b0001  BEQ Z == 1 : 'h1E0 , bra eq,label;
+//      `RFLD = 4'b1001  BNE Z == 0 : 'h9E0 , bra ne,label;
+//      `RFLD = 4'b0010  BC  C == 1 : 'h2E0 , bra c,label; -- BLO (lower)
+//      `RFLD = 4'b1010  BNC C == 0 : 'hAE0 , bra nc,label;-- BHS (higher or same)
+//      `RFLD = 4'b0011  BMI S == 1 : 'h3E0 , bra s,label;
+//      `RFLD = 4'b1011  BPL S == 0 : 'hBE0 , bra ns,label;
+//      `RFLD = 4'b0100  BOV O == 1 : 'h4E0 , bra o,label;
+//      `RFLD = 4'b1100  BNO O == 0 : 'hCE0 , bra no,label;
+//      `RFLD = 4'b0101  BGE        : 'h5E0 , bra ge,label;-- (greater or equal)
+//      `RFLD = 4'b1101  BLT        : 'hDE0 , bra lt,label;-- (less than)
+//      `RFLD = 4'b0110  BGT        : 'h6E0 , bra gt,label;-- (greter than)
+//      `RFLD = 4'b1110  BLE        : 'hEE0 , bra le,label;-- (less than)
+//      `RFLD = 4'b0111  BHI        : 'hFE0 , bra in,label;-- (higher)
+//      `RFLD = 4'b1111  BLS        : 'hFE0 , bra in,label;-- (lower or same)
+//
+// Shift modes:
+// -----------
+// normal shifts:
+// shl l,r#; (shift left  logical,    bit  0 = 0  , link_bit = msb)
+// shr l,r#; (shift right logical,    bit 11 = 0  , link_bit = lsb)
+// shr a,r#; (shift right arithmetic, bit 11 = msb, link_bit = lsb)
+//
+// link shifts:
+// shl k,r#; (shift left  logical,    bit  0 = link_bit, link_bit = msb)
+// shr k,r#; (shift right logical,    bit 11 = link_bit, link_bit = lsb)
+//
+// rotates:
+// shl r#,r#;(shift left  logical,    bit  0 = msb, link_bit = msb)
+// shr r#,r#;(shift right logical,    bit 11 = lsb, link_bit = lsb)
+//
+// undefined combinations:
+// shl a,r#;
+//
+// Register and Pointer definitions
+//
+// Pn register n  -> user register  'Pn'  n = 0 to f
+//
+// P0 pointer 0  -> program counter 'P0' -- not accesible
+// P1 pointer 1  -> user pointer    'P1'
+// P2 pointer 2  -> user pointer    'P2'
+// -- P3 to PE   -> user pointer
+// PF pointer 15 -> stack pointer   'PF' -- user access
+//
+// Rn register n  -> user register  'Rn'  n = 0 to f
+//
+// R0 register 0  -> temp register  'R0' -- modified by some instructions
+// R1 register 1  -> user register  'R1'
+// R2 register 2  -> user register  'R2'
+// R3 register 3  -> user register  'R3'
+// -- R4 to RE    -> user register
+// RF register 15 -> user register  'RF'
+
+// C0 counter  0 -> loop counter   'C0' -- decremented by loopcnt instructions
+// C1 counter  1 -> loop counter   'C1' -- decremented by loopcnt instructions
+// C2 counter  2 -> loop counter   'C2' -- decremented by loopcnt instructions
+// C3 counter  3 -> loop counter   'C3' -- decremented by loopcnt instructions
+//
+///////////////////////////////////////////////////////////////////////
+// NEMONIC  OPCODE  WORDS REG_ORDER // Comments: instruction format
+//   addv     03      2      1      //  addv rd,rs,val; // rd = rs + val
+///////////////////////////////////////////////////////////////////////
+// General Group    									g=good(passed), r=reg, p=ptr, m=mixed, 
+NOP   00  1  0 // nop;             // no operation           	(g)( )( )( )
+                                                             	            
+// Arithmetic and Logic group                                	            
+ADD   01  1  1 // add   rd,rs;     // rd = rd + rs           	(g)(r)( )( )
+ADC   02  1  1 // adc   rd,rs;     // rd = rd + rs + cy      	(g)(r)( )( )
+ADDV  03  2  1 // addv  rd,val;    // rd = rd + val          	(g)(r)( )( ) affects R0
+ADDRP 04  1  1 // addrp rd,ps;     // rd = rd + ps           	(g)(r)(p)(m) affects R0 ADDPR ?
+SUB   05  1  1 // sub   rd,rs;     // rd = rd - rs           	(g)(r)( )( )
+SBB   06  1  1 // sbb   rd,rs;     // rd = rd - rs - cy      	(g)(r)( )( 
+SUBV  07  2  1 // subv  rd,val;    // rd = rd - val          	(g)(r)( )( ) affects R0
+SUBRP 08  1  1 // subrp rd,ps;     // rd = rd - ps           	(g)(r)(p)(m) affects R0
+NOT   09  1  2 // not   [rs,]rd;   // rd = ~rs               	(g)(r)( )( )
+AND   0a  1  1 // and   rd,rs;     // rd = rd & rs           	(g)(r)( )( )
+ANDV  0b  2  1 // andv  rd,val;    // rd = rd & val          	(g)(r)( )( ) affects R0
+OR    0c  1  1 // or    rd,rs;     // rd = rd | rs           	(g)(r)( )( )
+ORV   0d  2  1 // orv   rd,val;    // rd = rd | val          	(g)(r)( )( ) affects R0
+XOR   0e  1  1 // xor   rd,rs;     // rd = rd ^ rs           	(g)(r)( )( )
+XORV  0f  2  1 // xorv  rd,val;    // rd = rd ^ val          	(g)(r)( )( ) affects R0
+INC   10  1  1 // inc   rd;        // rd = rd + 1            	(g)(r)( )( )
+DEC   11  1  1 // dec   rd;        // rd = rd - 1            	(g)(r)( )( )
+CMPR  12  1  1 // cmpr  rd,rs;     //      rd - rs           	(g)(r)( )( )
+CMPRV 13  2  2 // cmprv rg,val;    //      rg - val          	(g)(r)( )( ) affects R0
+CMPRP 14  1  1 // cmprp rg,pt;     //      rg - pt           	(g)(r)(p)(m) affects R0
+SHL   15  1  1 // shl   type,rg;   // rd = rd << 1           	(g)(r)( )( )   
+SHR   16  1  1 // shr   type,rg;   // rd = rd >> 1           	(g)(r)( )( )
+SHL4  17  1  1 // shl4  rg;        // rd = rd << 4           	(g)(r)( )( )   
+SHR4  18  1  1 // shr4  rg;        // rd = rd >> 4           	(g)(r)( )( )
+                                                             	            
+// Move Group                                                	            
+MVRR  19  1  0 // mvrr  rs,rd;     // rd = rs                	(g)(r)( )( )
+MVRP  1a  1  0 // mvrp  rs,pd;     // pd = rs                 	(g)(r)(p)(m)
+MVPR  1b  1  0 // mvpr  ps,rd;     // rd = ps                	(g)(r)(p)(m) affects R0
+MVPP  1c  1  0 // mvpp  ps,pd;     // pd = ps                 	(g)( )(p)( )
+SWAP  1d  1  0 // swap  rg,rg;     // rg <--> rg             	(g)(r)( )( ) affects R0
+SWAPP 1e  1  0 // swap  rg,pt;     // rg <--> pt              	(g)(r)(p)(m)
+                                                                            
+// Load Group                                                               
+LDCV   1f  2  1 // ldcv   cn,val;   // c[0/1/2/3] = val       	(g)(-)(-)(-)
+LDC    43  2  1 // ldc    cn,rs;    // c[0/1/2/3] = reg       	(g)(-)(-)(-)
+LDR    20  2  1 // ldr    rd,addr;  // rd = (addr)            	(g)(r)( )( )
+LDRV   21  2  1 // ldrv   rd,val;   // rd = val               	(g)(r)( )( )
+LDRP   22  1  1 // ldrp   rd,ps;    // rd = (ps)              	(g)(r)(p)(m)
+LDRX   23  2  1 // ldrx   rd,ps,val;// rd = (ps + val)        	(g)(r)(p)(m)
+LDRPI  24  1  1 // ldrpi  rd,ps;    // rd = (ps) => ps++       	(g)(r)(p)(m)
+LDRPD  25  1  1 // ldrpd  rd,ps;    // rd = (ps) => --ps      	(g)(r)(p)(m)
+PULL   25  1  1 // ldrpd  rd,ps;    // rd = (ps) => --ps      	(g)(r)(p)(m)
+POP    25  1  1 // ldrpd  rd,ps;    // rd = (ps) => --ps      	(g)(r)(p)(m)
+LDMAM  26  1  0 // ldmam  mn;       // m[0/1/2/3] access mode  	(g)(-)(-)(-)
+LDPAGV 27  2  1 // ldpagv val;      // page address = value   	(g)(-)(-)(-)
+LDPAG  42  1  0 // ldpag  rs;       // page address = reg     	(g)(r)(-)(-)affects R0
+                                                                            
+// Store Group                                                              
+STR   28  2  0 // str   rs,addr;   // (addr) = rs            	(g)(r)( )( )
+STRP  29  1  0 // strp  rs,pd;     // (pd) = rs              	(g)(r)(p)(m)
+STRX  2a  2  0 // strx  rs,pd,val; // (pd + val) = rs        	(g)(r)(p)(m)
+STRPI 2b  1  0 // strpi rs,pd;     // (pd) = rs => pd++       	(g)(r)(p)(m)
+PUSH  2b  1  0 // strpi rs,pd;     // (pd) = rs => pd++       	(g)(r)(p)(m)
+STRPD 2c  1  0 // strpd rs,pd;     // (pd) = rs => --pd      	(g)(r)(p)(m)
+                                                             	            
+// Pointer Group                                             	            
+LDP   2d  2  1 // ldp   pd,addr;   // pd = (addr)            	(g)( )(p)( )
+LDPV  2e  2  1 // ldpv  pd,val;    // pd = val               	(g)( )(p)( )  
+LDPY  44  1  1 // ldpy  pd,rs;     // pd = (pd+rs)           	(g)(r)(p)(m)  
+STP   2f  2  0 // stp   ps,addr;   // (addr) = ps            	(g)( )(p)( ) 
+INCP  30  1  1 // incp  pt;        // pd = pd + 1            	(g)( )(p)( )
+DECP  31  1  1 // decp  pt;        // pd = pd - 1            	(g)( )(p)( )
+                                                             	            
+// I/O Group                                                 	            
+INP   32  2  1 // inp   rd,port;   //     rd = (port) => i/o 	(g)(r)( )( )
+INPP  33  1  1 // inpp  rd,ps;     //     rd = (ps)   => i/o 	(g)(r)(p)(m)
+OUTP  34  2  0 // outp  rs,port;   // (port) =  rs    => i/o 	(g)(r)( )( )
+OUTPP 35  1  0 // outpp rs,pd;     //   (pd) =  rs    => i/o 	(g)(r)(p)(m)
+//    36       // see DCJZ                                   	            
+                                                             	            
+// Control Transfer                                          	            
+// Branch Group, two's complements -127/+128                 	            
+BRA   37  2  0 // bra   cond,offs; // pc = pc + offset       	(g)( )(p)( )    
+                                                             	            
+// Jump Group, full address range                            	            
+DCJZ  36  2  1 // dcjz   cn,addr;  // pc = pc + offset,cn=0  	(g)( )(p)( )
+DCJNZ 38  2  1 // dcjnz  cn,addr;  // pc = pc + offset,cn~=0 	(g)( )(p)( )
+JMP   39  2  5 // jmp   [t/f]#,addr// pc = addr              	(g)( )(p)( )
+JMPP  3a  1  1 // jmpp  pt;        // pc = pt                	(g)( )(p)( )
+JSR   3b  2  0 // jsr   addr;      // pc = addr      => --sp 	(g)( )(p)( )
+RTS   3c  1  0 // rts              // pc = (sp)      => sp++ 	(g)( )(p)( )
+RTI   3d  1  0 // rti              // pc = (sp)      => sp++ 	(/)(/)(/)(/)
+                                                             	            
+// Bit control                                               	            
+// User flags and single bit output port.                    	            
+UFLAG 3e  1  5 // uflag [t/f]#     // uflag bit n clr/set    	(g)(-)(-)(-)
+UPORT 3f  1  5 // uport [t/f]#     // uport bit n clr/set    	(g)(-)(-)(-)
+// Test bits                                                 	            
+BIT   40  1  1 // bit   rd,rs;     // rd = rd & rs           	(g)(r)( )( )
+BITV  41  2  1 // bitv  rd,val;    // rd = rd & val          	(g)(r)( )( ) affects R0
+//    42       // see LDPAG                                  	            
+//    43       // see LDC                                    	            
+//    44       // see LDPY                                   	            
+SEI   45  1  1 // sei;             // set interrupt,   enable	(.)
+CLI   46  1  1 // cli;             // clear interrupt, disable	(.)
+SWI   47  2  1 // swi addr;        // pc = (sp)      => sp++ 	(/)(/)(/)(/)
+                                                             	            
+// Special Instructions                                      	            
+HWI   5a  1  0 // hwi ;            // hw interrupt, do not use 	(g)(r)(p)(m)
+STOP  ff  1  0 // stop;            // debug                  	(g)(r)(p)(m)
+
+
+
+// Conditional and mofifier fields.
+// conditional for branchs.
+  z   1  0  0 // bra  z,label
+  nz  9  0  0 // bra nz,label
+  e   1  0  0 // bra  e,label
+  ne  9  0  0 // bra ne,label
+  c   2  0  0 // bra  c,label
+  nc  a  0  0 // bra nc,label
+  lo  2  0  0 // bra lo,label (unsigned)
+  hs  a  0  0 // bra hs,label (unsigned)
+  s   3  0  0 // bra  s,label
+  ns  b  0  0 // bra ns,label
+  o   4  0  0 // bra  o,label
+  no  c  0  0 // bra no,label
+  ge  5  0  0 // bra ge,label
+  lt  d  0  0 // bra lt,label
+  gt  6  0  0 // bra gt,label
+  le  e  0  0 // bra le,label
+  hi  7  0  0 // bra hi,label (unsigned)
+  ls  f  0  0 // bra ls,label (unsigned)
+
+// modifier for shifts
+   l  0  0  0 // shr l,rd;  // shift left or right logical
+   k  1  0  0 // shl k,rd;  // shift left or right link bit
+   a  2  0  0 // shr a,rd;  // shift right arithmetic
+   r  3  0  0 // shl r,rd;  // rotate left or right, link bit = msb or lsb.
+///////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////////
+//   SPECIAL NOTES:
+///////////////////////////////////////////////////////////////////////////////
+//
+// 1) Pointer 0 (PC) is read only access. Valid instructions are:
+//    stp   p0,address;
+//    jmpp  p0;
+//
+// 2) Register 0 (R) is modified by the following instructions.
+//    Arithmetic Group
+//    ~~~~~~~~~~~~~~~~
+//     ADDV  03  2  1 // addv  rd,val;    // rd = rd + val          (*) affects R0
+//     ADDRP 04  1  1 // addrp rd,ps;     // rd = rd + ps           (*) affects R0
+//     SUBV  07  2  1 // subv  rd,val;    // rd = rd - val          (*) affects R0
+//     SUBRP 08  1  1 // subrp rd,ps;     // rd = rd - ps           (*) affects R0
+//     ANDV  0b  2  1 // andv  rd,val;    // rd = rd & val          (*) affects R0
+//     ORV   0d  2  1 // orv   rd,val;    // rd = rd | val          (*) affects R0
+//     XORV  0f  2  1 // xorv  rd,val;    // rd = rd ^ val          (*) affects R0
+//     CMPRV 13  2  2 // cmprv rg,val;    //      rg - val          (*) affects R0
+//     CMPRP 14  1  1 // cmprp rg,pt;     //      rg - pt           (*) affects R0
+//    Move Group
+//    ~~~~~~~~~~
+//     MVPR  1b  1  0 // mvpr  ps,rd;     // rd = ps                (*) affects R0
+//     SWAP  1d  1  0 // swap  rg,rg;     // rg <--> rg             (*) affects R0
+// 
+//  3) LDMAM									ST LD
+//		LDMAM m0 store internal load internal	 0  0 ii
+//		LDMAM m1 store internal load external	 0  1 ie
+//		LDMAM m2 store external load internal	 1  0 ei
+//		LDMAM m3 store external load external	 1  1 ee
+//
+//		instructions:
+//			LDR 	STR
+//			LDRP  	STRP
+//			LDRX  	STRX
+//			LDRPI 	STRPI	PUSH
+//			LDRPD   STRPD	PULL
+//			LDP		STP
+///////////////////////////////////////////////////////////////////////////////

@@ -1,0 +1,5017 @@
+*****************************************
+Assembler and Date    : version 6.1: (11-09-21)
+Program size          : 16272
+----------
+Asm  file name        : test_arith_full.asm
+List file name        : test_arith_full.lst
+----------
+       Hex  file name : test_arith_full.hex
+       COE  file name : test_arith_full.coe
+       MEM  file name : test_arith_full.mem
+Altera Mif  file name : test_arith_full_alt.mif
+Xilinx Mif  file name : test_arith_full_xil.mif
+*****************************************
+
+Labels and Defines:
+      APPREG_00: 0100 
+      APPREG_10: 0120 
+      BASEREGIO: 0000 
+      BOOT_ADDR: 3f00 
+       CHARFILL: 002d 
+             CR: 000d 
+           CTLD: 0004 
+           CTLE: 0005 
+           CTLI: 0009 
+           CTLL: 000c 
+           CTLP: 0010 
+           CTLR: 0012 
+           CTLS: 0013 
+           CTLX: 0003 
+           CTLZ: 001a 
+           CTL_: 001f 
+           DATE: 0001 
+         ERL_IX: 0005 
+          ER_IX: 0003 
+            ESC: 001b 
+            ETX: 0003 
+             FF: 000c 
+       GPREG_00: 0000 
+       GPREG_01: 0001 
+       GPREG_02: 0002 
+       GPREG_03: 0003 
+       GPREG_04: 0004 
+       GPREG_05: 0005 
+       GPREG_06: 0006 
+       GPREG_07: 0007 
+       GPREG_08: 0008 
+       GPREG_09: 0009 
+       GPREG_0a: 000a 
+       GPREG_0b: 000b 
+       GPREG_0c: 000c 
+       GPREG_0d: 000d 
+       GPREG_0e: 000e 
+       GPREG_0f: 000f 
+           HOUR: 0000 
+         IRL_IX: 0004 
+          IR_IX: 0002 
+       IR_IX_LN: 0001 
+             LF: 000a 
+      MAIN_ADDR: 0010 
+         MINUTE: 0000 
+          MONTH: 0001 
+           NULL: 0000 
+        NUMFILL: 0005 
+      PCODE_MSK: 0002 
+      PCODE_NSK: fffd 
+     RESET_ADDR: 0000 
+         RXDVLD: 0080 
+         RXEMPT: 0002 
+          RXERR: 0008 
+         RXFULL: 0004 
+      SCOPE_MSK: 3000 
+      SCOPE_NSK: cfff 
+        SECONDS: 0000 
+         SIGNED: 8000 
+            SPC: 0020 
+          SR_IX: 0000 
+   STACK_LENGTH: 0040 
+     TARGET_MSK: 0001 
+     TARGET_NSK: fffe 
+            TP1: 0001 
+          TP1_2: 0011 
+            TP2: 0010 
+      TRIGS_MSK: c000 
+      TRIGS_NSK: 3fff 
+         TXEMPT: 0020 
+         TXFULL: 0040 
+        UARTDAT: 0010 
+        UARTSTA: 0011 
+      USRSW_MSK: 0000 
+      USRSW_NSK: ffff 
+           YEAR: 07e6 
+        a_geta1: 0131 
+        a_geta2: 0137 
+       a_getadr: 012c 
+       a_getend: 015f 
+        a_getex: 015d 
+       a_getmem: 0150 
+       a_getval: 0141 
+         a_ones: 0196 
+         a_quit: 0233 
+       a_regdat: 0181 
+       a_setadd: 0165 
+      a_setadd2: 0180 
+           a_w1: 01ba 
+           a_w2: 01cb 
+           a_w3: 01dd 
+           a_w4: 01ee 
+           a_w5: 0201 
+           a_w6: 020b 
+           a_w7: 0215 
+           a_w8: 021f 
+           a_w9: 022c 
+         a_wend: 022d 
+        a_wrout: 01aa 
+        a_wrval: 019b 
+       a_wrval1: 0184 
+       a_wrval2: 0189 
+       appset_m: 0c1b 
+        asc2hex: 03e9 
+          bitop: 1188 
+        boot_ch: 3f08 
+        boot_fh: 3f1a 
+         boot_p: 3f03 
+        boot_p0: 3f1c 
+        boot_p1: 3f1e 
+        boot_p2: 3f21 
+        boot_p3: 3f22 
+        boot_p4: 3f36 
+       boot_p4b: 3f42 
+        boot_p5: 3f4a 
+        boot_p6: 3f4e 
+        boot_p7: 3f50 
+         boot_r: 3f60 
+        boot_r1: 3f64 
+        boot_r2: 3f67 
+        boot_r3: 3f76 
+        boot_r4: 3f80 
+        bufdum1: 02d3 
+        bufdum2: 02d5 
+        bufdump: 02c8 
+       bufdump0: 02ca 
+      buff_addr: 118d 
+     buff_addrx: 118f 
+       buff_inc: 1191 
+       buff_len: 118e 
+     buff_value: 1190 
+        chkstat: 03a7 
+        chome_m: 06c5 
+         clrval: 0125 
+          cls_m: 06bf 
+       clscreen: 0099 
+      clscreen2: 00a7 
+        cvalue1: 1182 
+        cvalue2: 1183 
+       d_appset: 00ae 
+        d_areg1: 00d6 
+        d_aregs: 00cd 
+         d_base: 010e 
+        d_debug: 00ba 
+         d_help: 00c1 
+        d_helpa: 00c7 
+         d_mema: 00e1 
+         d_memb: 00fb 
+      d_membyte: 0105 
+        d_memof: 00f4 
+        d_memon: 00ee 
+      d_memword: 0107 
+         d_menu: 00a8 
+      d_nothing: 011d 
+      d_pagenum: 050a 
+     d_pagenum2: 050e 
+     d_pagenum3: 0517 
+        d_pcode: 04e7 
+       d_prgver: 0072 
+      d_prgver2: 007f 
+       d_rtcval: 0080 
+      d_rtcval2: 0094 
+       d_scpsrc: 04a1 
+       d_sysset: 00b4 
+       d_target: 04cd 
+      d_target2: 04d7 
+       d_trgsrc: 04b6 
+       d_txpage: 0119 
+        dbugptr: 11a5 
+        debug_m: 08ec 
+      delimeter: 1189 
+       disdigit: 041c 
+        dishex2: 043c 
+        dishex4: 042e 
+        dishexs: 0423 
+      disscreen: 0097 
+         divend: 0558 
+       division: 0550 
+       divstart: 0551 
+       e_wrval1: 0188 
+       e_wrval2: 019a 
+       echo_off: 006d 
+        echo_on: 0068 
+      echo_save: 006f 
+       echomode: 118c 
+      enbscreen: 0095 
+       end_boot: 3f55 
+       end_loop: 3f5b 
+         h2btab: 06af 
+         help_a: 0d1e 
+         help_m: 0da5 
+           hex1: 03b6 
+        hex1val: 1180 
+           hex2: 03c4 
+        hex2asc: 03ad 
+        hex2val: 1181 
+      hexval4_m: 067f 
+        hw_irq1: 0559 
+        hw_irq2: 055c 
+      hw_irq2_1: 055d 
+        hw_irq3: 055f 
+      hw_irq3_1: 0569 
+      hw_irq3_2: 056a 
+        hw_irq4: 056b 
+      hw_irq4_1: 05b2 
+      hw_irq4_2: 05b0 
+      hw_irq4_3: 05ae 
+      hw_irq4_4: 05ac 
+      hw_irq4_5: 05aa 
+      hw_irq4_6: 0597 
+      hw_irq4_7: 05a0 
+        inpaddr: 1185 
+        inpchar: 1184 
+         irq1_v: 0002 
+         irq2_v: 0004 
+         irq3_v: 0006 
+         irq4_v: 0008 
+        irq_dis: 0507 
+        irq_enb: 0504 
+        irq_set: 04f9 
+        irqmask: 1197 
+         kpst00: 06ca 
+         kpst10: 06fa 
+         kpst20: 0756 
+         kpst30: 0762 
+         kpst40: 07a6 
+           main: 0054 
+          main2: 005f 
+         memacc: 1193 
+      membyte_m: 0657 
+        memdum4: 0288 
+       memdumb1: 0267 
+       memdumb2: 0269 
+        memdump: 023e 
+       memdump0: 0240 
+       memdumw1: 024d 
+       memdumw2: 024f 
+        memfill: 02f0 
+       memfill2: 030b 
+       memfill3: 0312 
+       memfill4: 031b 
+         memlen: 02e3 
+        memnext: 0237 
+         memode: 1192 
+        memof_m: 0627 
+        memon_m: 063f 
+          memop: 119c 
+         memptr: 117e 
+     memptrlast: 117f 
+      memword_m: 066b 
+           menu: 0816 
+          myapp: 05b6 
+      no_out_ch: 03f1 
+          noneg: 03fe 
+        outdata: 1186 
+         p_jump: 0342 
+         p_rest: 0348 
+         p_save: 033e 
+          pjump: 119a 
+       prog_cnt: 3f8f 
+       prog_lng: 3f8e 
+         prompt: 06aa 
+       promptcr: 06ad 
+       promptlf: 06ab 
+       promptx2: 06a8 
+        rd_hex1: 03ec 
+        rd_hex2: 0412 
+        rd_hex9: 0415 
+        rd_hexa: 041b 
+         rdchar: 044c 
+         rdmemb: 0270 
+         rdmemw: 0256 
+         regptr: 118b 
+        reset_v: 0000 
+     restorebuf: 0534 
+    restorebuf1: 053b 
+        rtcdump: 0085 
+         runapp: 0608 
+        s_bitop: 011e 
+       s_bitop1: 0123 
+        savebuf: 0518 
+       savebuf1: 051f 
+       savebuf2: 0522 
+          sesma: 031f 
+        setdate: 046d 
+        sethour: 0478 
+         setmin: 0488 
+       setmonth: 0462 
+        setpar1: 02a5 
+        setpar2: 02b6 
+         setsec: 0496 
+          setup: 0010 
+        setyear: 0457 
+          ssm_1: 0323 
+          ssm_2: 0330 
+        ssm_end: 034c 
+       ssm_exec: 0351 
+        ssm_lst: 1199 
+        ssm_pst: 1198 
+          stack: 11ad 
+        sw_irq1: 05b5 
+       sysset_m: 0ad5 
+          temp0: 118a 
+       tempvar1: 11ed 
+       tempvar2: 122d 
+     test_arith: 05bb 
+       tmr1date: 119f 
+       tmr1hour: 11a0 
+        tmr1min: 11a1 
+      tmr1month: 119e 
+       tmr1msec: 1195 
+        tmr1sec: 11a2 
+      tmr1value: 1196 
+       tmr1year: 119d 
+         tohex2: 03c9 
+        tohex21: 03d6 
+        tohex22: 03e4 
+       treset_m: 0695 
+        tx_char: 0359 
+        tx_ends: 0378 
+        tx_fill: 0364 
+        tx_line: 0352 
+       tx_line2: 0354 
+         tx_nxt: 0370 
+        tx_page: 0379 
+       tx_page2: 037b 
+        tx_prmt: 0399 
+      tx_prmtcr: 038b 
+      tx_prmtlf: 0392 
+      tx_prmtx2: 03a0 
+       uartstat: 1187 
+         varchk: 118d 
+        vardum1: 0295 
+        vardum2: 0297 
+        vardump: 028b 
+       vardump0: 028d 
+      version_m: 060a 
+         wpst00: 07d6 
+         wpst01: 07e2 
+         wpst02: 07fe 
+         wpst03: 080a 
+     zboot_addr: 3f00 
+      zend_code: 117d 
+       zend_ram: 126d 
+*****************************************
+Opcode listing.
+
+0000   0039   reset_v: jmp setup ; 
+0001   0010
+0002   0039   irq1_v: jmp hw_irq1 ; 
+0003   0559
+0004   0039   irq2_v: jmp hw_irq2 ; 
+0005   055c
+0006   0039   irq3_v: jmp hw_irq3 ; 
+0007   055f
+0008   0039   irq4_v: jmp hw_irq4 ; 
+0009   056b
+0010   0046   setup: cli ;
+0011   0a2e   ldpv pA,UARTDAT ; 
+0012   0010
+0013   0b2e   ldpv pB,UARTSTA ;
+0014   0011
+0015   0f2e   ldpv pF,stack ; 
+0016   11ad
+0017   072e   ldpv p7,dbugptr ; 
+0018   11a5
+0019   0d2e   ldpv pD,tempvar1 ; 
+001a   11ed
+001b   0e2e   ldpv pE,tempvar2 ; 
+001c   122d
+001d   0121   ldrv r1,kpst00 ; 
+001e   06ca
+001f   1028   str r1,ssm_pst ; 
+0020   1198
+0021   1028   str r1,ssm_lst ; 
+0022   1199
+0023   0121   ldrv r1,0 ; 
+0024   0000
+0025   1034   outp r1,GPREG_01 ; 
+0026   0001
+0027   1034   outp r1,GPREG_04 ; 
+0028   0004
+0029   1034   outp r1,GPREG_05 ; 
+002a   0005
+002b   1034   outp r1,GPREG_06 ; 
+002c   0006
+002d   0121   ldrv r1,tempvar1 ; 
+002e   11ed
+002f   1034   outp r1,GPREG_00 ; 
+0030   0000
+0031   0121   ldrv r1,zend_code ; 
+0032   117d
+0033   1034   outp r1,GPREG_02 ; 
+0034   0002
+0035   0121   ldrv r1,zend_ram ; 
+0036   126d
+0037   1034   outp r1,GPREG_03 ; 
+0038   0003
+0039   0121   ldrv r1,'h0002 ; 
+003a   0002
+003b   1034   outp r1,GPREG_07 ; 
+003c   0007
+003d   0121   ldrv r1,'h7840 ; 
+003e   7840
+003f   1034   outp r1,GPREG_08 ; 
+0040   0008
+0041   0121   ldrv r1,'h017d ; 
+0042   017d
+0043   1034   outp r1,GPREG_09 ; 
+0044   0009
+0045   823e   uflag t2 ; 
+0046   033e   uflag f3 ; 
+0047   053e   uflag f5 ; 
+0048   063e   uflag f6 ; 
+0049   873e   uflag t7 ; 
+004a   0e3e   uflag fE ; 
+004b   0a3e   uflag fA ; 
+004c   003f   uport f0 ; 
+004d   043f   uport f4 ; 
+004e   083f   uport f8 ; 
+004f   093f   uport f9 ; 
+0050   003b   jsr d_target ; 
+0051   04cd
+0052   003b   jsr irq_enb ; 
+0053   0504
+0054   803f   main: uport t0 ; 
+0055   b133   inpp r1,pB ; 
+0056   003f   uport f0 ; 
+0057   0141   bitv r1,RXDVLD ; 
+0058   0080
+0059   1037   bra z,main2 ; 
+005a   0005
+005b   003b   jsr rdchar ; 
+005c   044c
+005d   003b   jsr sesma ; 
+005e   031f
+005f   0339   main2: jmp f3,main ; 
+0060   0054
+0061   033e   uflag f3 ; 
+0062   0121   ldrv r1,main ; 
+0063   0054
+0064   1f2b   push r1,pF ; 
+0065   032d   ldp p3,pjump ; 
+0066   119a
+0067   033a   jmpp p3 ; 
+0068   873e   echo_on: uflag t7 ;
+0069   0121   ldrv r1,1 ;
+006a   0001
+006b   0037   bra echo_save ;
+006c   0003
+006d   073e   echo_off: uflag f7 ;
+006e   110e   xor r1,r1 ;
+006f   1028   echo_save: str r1,echomode ;
+0070   118c
+0071   003c   rts ; 
+0072   873e   d_prgver: uflag t7 ;
+0073   0c2e   ldpv pC,version_m ;
+0074   060a
+0075   003b   jsr tx_line ;
+0076   0352
+0077   003b   jsr tx_prmtlf ;
+0078   0392
+0079   0120   ldr r1,echomode ;
+007a   118c
+007b   110c   or r1,r1 ;
+007c   9037   bra nz,d_prgver2 ;
+007d   0002
+007e   073e   uflag f7 ;
+007f   003c   d_prgver2: rts ;
+0080   873e   d_rtcval: uflag t7 ;
+0081   012e   ldpv p1,tmr1year ;
+0082   119d
+0083   011f   ldcv c1,5 ; 
+0084   0005
+0085   1224   rtcdump: ldrpi r2,p1 ;
+0086   003b   jsr dishex4 ; 
+0087   042e
+0088   0138   dcjnz c1,rtcdump ;
+0089   0085
+008a   0c2e   ldpv pC,promptlf ; 
+008b   06ab
+008c   003b   jsr tx_line ; 
+008d   0352
+008e   0120   ldr r1,echomode ;
+008f   118c
+0090   110c   or r1,r1 ;
+0091   9037   bra nz,d_rtcval2 ;
+0092   0002
+0093   073e   uflag f7 ;
+0094   003c   d_rtcval2: rts ;
+0095   823e   enbscreen: uflag t2 ;
+0096   003c   rts ; 
+0097   023e   disscreen: uflag f2 ;
+0098   003c   rts ; 
+0099   0239   clscreen: jmp f2,clscreen2 ;
+009a   00a7
+009b   0c2e   ldpv pC,cls_m ; 
+009c   06bf
+009d   003b   jsr tx_line ; 
+009e   0352
+009f   003b   jsr tx_prmtx2 ;
+00a0   03a0
+00a1   0c2e   ldpv pC,chome_m ; 
+00a2   06c5
+00a3   003b   jsr tx_line ; 
+00a4   0352
+00a5   003b   jsr tx_prmtx2 ;
+00a6   03a0
+00a7   003c   clscreen2: rts ;
+00a8   003b   d_menu: jsr clscreen ; 
+00a9   0099
+00aa   0c2e   ldpv pC,menu ; 
+00ab   0816
+00ac   0039   jmp d_txpage ;
+00ad   0119
+00ae   003b   d_appset: jsr clscreen ; 
+00af   0099
+00b0   0c2e   ldpv pC,appset_m ; 
+00b1   0c1b
+00b2   0039   jmp d_txpage ;
+00b3   0119
+00b4   003b   d_sysset: jsr clscreen ; 
+00b5   0099
+00b6   0c2e   ldpv pC,sysset_m ; 
+00b7   0ad5
+00b8   0039   jmp d_txpage ;
+00b9   0119
+00ba   873e   d_debug: uflag t7 ; 
+00bb   003b   jsr clscreen ; 
+00bc   0099
+00bd   0c2e   ldpv pC,debug_m ; 
+00be   08ec
+00bf   0039   jmp d_txpage ;
+00c0   0119
+00c1   003b   d_help: jsr clscreen ; 
+00c2   0099
+00c3   0c2e   ldpv pC,help_m ; 
+00c4   0da5
+00c5   0039   jmp d_txpage ;
+00c6   0119
+00c7   003b   d_helpa: jsr clscreen ; 
+00c8   0099
+00c9   0c2e   ldpv pC,help_a ; 
+00ca   0d1e
+00cb   0039   jmp d_txpage ;
+00cc   0119
+00cd   003b   d_aregs: jsr clscreen ; 
+00ce   0099
+00cf   003b   jsr tx_prmt ; 
+00d0   0399
+00d1   0120   ldr r1,regptr ;
+00d2   118b
+00d3   181a   mvrp r1,p8 ;
+00d4   011f   ldcv c1,15 ;
+00d5   000f
+00d6   8233   d_areg1: inpp r2,p8 ;
+00d7   003b   jsr dishex4 ;
+00d8   042e
+00d9   003b   jsr tx_prmt ;
+00da   0399
+00db   0830   incp p8 ;
+00dc   0138   dcjnz c1,d_areg1 ;
+00dd   00d6
+00de   003b   jsr tx_prmt ;
+00df   0399
+00e0   003c   rts ; 
+00e1   0120   d_mema: ldr r1,memacc ;
+00e2   1193
+00e3   010f   xorv r1,1 ;
+00e4   0001
+00e5   9037   bra nz,d_memon ;
+00e6   0008
+00e7   220e   xor r2,r2 ;
+00e8   2028   str r2,memop ;
+00e9   119c
+00ea   0c2e   ldpv pC,memof_m ; 
+00eb   0627
+00ec   0037   bra d_memof ;
+00ed   0007
+00ee   0221   d_memon: ldrv r2,3 ;
+00ef   0003
+00f0   2028   str r2,memop ;
+00f1   119c
+00f2   0c2e   ldpv pC,memon_m ;
+00f3   063f
+00f4   1028   d_memof: str r1,memacc ;
+00f5   1193
+00f6   003b   jsr tx_line ;
+00f7   0352
+00f8   003b   jsr tx_prmt ;
+00f9   0399
+00fa   003c   rts ; 
+00fb   0120   d_memb: ldr r1,memode ;
+00fc   1192
+00fd   010f   xorv r1,1 ;
+00fe   0001
+00ff   9037   bra nz,d_membyte ;
+0100   0005
+0101   0c2e   ldpv pC,memword_m ; 
+0102   066b
+0103   0037   bra d_memword ;
+0104   0003
+0105   0c2e   d_membyte: ldpv pC,membyte_m ;
+0106   0657
+0107   1028   d_memword: str r1,memode ;
+0108   1192
+0109   003b   jsr tx_line ;
+010a   0352
+010b   003b   jsr tx_prmt ;
+010c   0399
+010d   003c   ;     
+010e   0c2e   d_base: ldpv pC,hexval4_m ; 
+010f   067f
+0110   003b   jsr tx_line ;
+0111   0352
+0112   003b   jsr asc2hex ;
+0113   03e9
+0114   2028   str r2,regptr ;
+0115   118b
+0116   003b   jsr tx_prmtx2 ;
+0117   03a0
+0118   003c   rts ; 
+0119   003b   d_txpage: jsr tx_page ;
+011a   0379
+011b   003b   jsr tx_prmtcr ;
+011c   038b
+011d   003c   d_nothing: rts ;
+011e   0120   s_bitop: ldr r1,inpchar ; 
+011f   1184
+0120   0739   jmp f7,s_bitop1 ;
+0121   0123
+0122   1a35   outpp r1,pA ; 
+0123   1028   s_bitop1: str r1,bitop ;
+0124   1188
+0125   0121   clrval: ldrv r1,'h3030 ; 
+0126   3030
+0127   1028   str r1,cvalue1 ;
+0128   1182
+0129   1028   str r1,cvalue2 ;
+012a   1183
+012b   003c   rts ; 
+012c   0120   a_getadr: ldr r1,inpchar ;
+012d   1184
+012e   0739   jmp f7,a_geta1 ;
+012f   0131
+0130   1a35   outpp r1,pA ; 
+0131   0220   a_geta1: ldr r2,cvalue1 ;
+0132   1182
+0133   0320   ldr r3,cvalue2 ;
+0134   1183
+0135   011f   ldcv c1,7 ;
+0136   0007
+0137   0215   a_geta2: shl l,r2 ;
+0138   1315   shl k,r3 ;
+0139   0138   dcjnz c1,a_geta2 ;
+013a   0137
+013b   3028   str r3,cvalue2 ;
+013c   1183
+013d   120c   or r2,r1 ;
+013e   2028   str r2,cvalue1 ;
+013f   1182
+0140   003c   rts ; 
+0141   003b   a_getval: jsr a_setadd ;
+0142   0165
+0143   003b   jsr tx_prmt ;
+0144   0399
+0145   012d   ldp p1,inpaddr ;
+0146   1185
+0147   0120   ldr r1,bitop ;
+0148   1188
+0149   1113   cmprv r1,"m" ;
+014a   006d
+014b   1037   bra z,a_getmem ;
+014c   0004
+014d   1233   inpp r2,p1 ;
+014e   0037   bra a_getend ;
+014f   0010
+0150   102f   a_getmem: stp p1,memptr ;
+0151   117e
+0152   102f   stp p1,memptrlast ;
+0153   117f
+0154   0420   ldr r4,memop ;
+0155   119c
+0156   040b   andv r4,3 ;
+0157   0003
+0158   9037   bra nz,a_getex ;
+0159   0004
+015a   1222   ldrp r2,p1 ;
+015b   0037   bra a_getend ;
+015c   0003
+015d   1026   a_getex: ldmam m1 ; 
+015e   1222   ldrp r2,p1 ;
+015f   0026   a_getend: ldmam m0 ; 
+0160   003b   jsr dishex4 ;
+0161   042e
+0162   003b   jsr tx_prmt ;
+0163   0399
+0164   003c   rts ; 
+0165   0120   a_setadd: ldr r1,cvalue1 ;
+0166   1182
+0167   003b   jsr tohex2 ;
+0168   03c9
+0169   2319   mvrr r2,r3 ;
+016a   0120   ldr r1,cvalue2 ;
+016b   1183
+016c   003b   jsr tohex2 ;
+016d   03c9
+016e   0217   shl4 r2 ;
+016f   0217   shl4 r2 ;
+0170   320c   or r2,r3 ;
+0171   2028   str r2,inpaddr ;
+0172   1185
+0173   0121   ldrv r1,'h3030 ;
+0174   3030
+0175   1028   str r1,cvalue1 ;
+0176   1182
+0177   1028   str r1,cvalue2 ;
+0178   1183
+0179   0120   ldr r1,inpchar ; 
+017a   1184
+017b   1028   str r1,delimeter ;
+017c   1189
+017d   0739   jmp f7,a_setadd2;
+017e   0180
+017f   1a35   outpp r1,pA ;
+0180   003c   a_setadd2: rts ;
+0181   003b   a_regdat: jsr a_getadr ;
+0182   012c
+0183   003c   rts ; 
+0184   003b   a_wrval1: jsr a_wrval ;
+0185   019b
+0186   003b   jsr a_wrout ;
+0187   01aa
+0188   003c   e_wrval1: rts ;
+0189   003b   a_wrval2: jsr a_wrval ;
+018a   019b
+018b   0220   ldr r2,outdata ;
+018c   1186
+018d   2209   not r2 ;
+018e   0320   ldr r3,delimeter ;
+018f   1189
+0190   3313   cmprv r3,"-" ;
+0191   002d
+0192   9037   bra ne,a_ones ;
+0193   0003
+0194   0203   addv r2,1 ;
+0195   0001
+0196   2028   a_ones: str r2,outdata ;
+0197   1186
+0198   003b   jsr a_wrout ;
+0199   01aa
+019a   003c   e_wrval2: rts ;
+019b   0120   a_wrval: ldr r1,cvalue1 ;
+019c   1182
+019d   003b   jsr tohex2 ;
+019e   03c9
+019f   2319   mvrr r2,r3 ; 
+01a0   0120   ldr r1,cvalue2 ;
+01a1   1183
+01a2   003b   jsr tohex2 ;
+01a3   03c9
+01a4   0217   shl4 r2 ;
+01a5   0217   shl4 r2 ;
+01a6   320c   or r2,r3 ; 
+01a7   2028   str r2,outdata ;
+01a8   1186
+01a9   003c   rts ; 
+01aa   0120   a_wrout: ldr r1,outdata ;
+01ab   1186
+01ac   0220   ldr r2,inpaddr ;
+01ad   1185
+01ae   0320   ldr r3,bitop ;
+01af   1188
+01b0   0420   ldr r4,memop ;
+01b1   119c
+01b2   3313   cmprv r3,"w" ; 
+01b3   0077
+01b4   9037   bra ne,a_w1 ;
+01b5   0005
+01b6   211a   mvrp r2,p1 ;
+01b7   1135   outpp r1,p1 ;
+01b8   0037   bra a_wend ;
+01b9   0074
+01ba   3313   a_w1: cmprv r3,"s" ; 
+01bb   0073
+01bc   9037   bra ne,a_w2 ;
+01bd   000e
+01be   211a   mvrp r2,p1 ;
+01bf   032e   ldpv p3,h2btab ;
+01c0   06af
+01c1   0120   ldr r1,outdata ;
+01c2   1186
+01c3   3104   addrp r1,p3 ;
+01c4   131a   mvrp r1,p3 ;
+01c5   3122   ldrp r1,p3 ; 
+01c6   1233   inpp r2,p1 ; 
+01c7   120c   or r2,r1 ;
+01c8   2135   outpp r2,p1 ;
+01c9   0037   bra a_wend ;
+01ca   0063
+01cb   3313   a_w2: cmprv r3,"c" ; 
+01cc   0063
+01cd   9037   bra ne,a_w3 ;
+01ce   000f
+01cf   211a   mvrp r2,p1 ;
+01d0   032e   ldpv p3,h2btab ;
+01d1   06af
+01d2   0120   ldr r1,outdata ;
+01d3   1186
+01d4   3104   addrp r1,p3 ;
+01d5   131a   mvrp r1,p3 ;
+01d6   3122   ldrp r1,p3 ; 
+01d7   1109   not r1,r1 ; 
+01d8   1233   inpp r2,p1 ; 
+01d9   120a   and r2,r1 ;
+01da   2135   outpp r2,p1 ;
+01db   0037   bra a_wend ;
+01dc   0051
+01dd   3313   a_w3: cmprv r3,"t" ; 
+01de   0074
+01df   9037   bra ne,a_w4 ;
+01e0   000e
+01e1   211a   mvrp r2,p1 ;
+01e2   032e   ldpv p3,h2btab ;
+01e3   06af
+01e4   0120   ldr r1,outdata ;
+01e5   1186
+01e6   3104   addrp r1,p3 ;
+01e7   131a   mvrp r1,p3 ;
+01e8   3122   ldrp r1,p3 ; 
+01e9   1233   inpp r2,p1 ; 
+01ea   120e   xor r2,r1 ;
+01eb   2135   outpp r2,p1 ;
+01ec   0037   bra a_wend ;
+01ed   0040
+01ee   3313   a_w4: cmprv r3,"i" ; 
+01ef   0069
+01f0   9037   bra ne,a_w5 ;
+01f1   0010
+01f2   211a   mvrp r2,p1 ;
+01f3   032e   ldpv p3,h2btab ;
+01f4   06af
+01f5   0120   ldr r1,outdata ;
+01f6   1186
+01f7   3104   addrp r1,p3 ;
+01f8   131a   mvrp r1,p3 ;
+01f9   3122   ldrp r1,p3 ; 
+01fa   1233   inpp r2,p1 ; 
+01fb   120e   xor r2,r1 ;
+01fc   2135   outpp r2,p1 ; 
+01fd   120e   xor r2,r1 ;
+01fe   2135   outpp r2,p1 ;
+01ff   0037   bra a_wend ;
+0200   002d
+0201   3313   a_w5: cmprv r3,"a" ; 
+0202   0061
+0203   9037   bra ne,a_w6 ;
+0204   0007
+0205   211a   mvrp r2,p1 ;
+0206   1333   inpp r3,p1 ; 
+0207   310a   and r1,r3 ;
+0208   1135   outpp r1,p1 ;
+0209   0037   bra a_wend ;
+020a   0023
+020b   3313   a_w6: cmprv r3,"o" ; 
+020c   006f
+020d   9037   bra ne,a_w7 ;
+020e   0007
+020f   211a   mvrp r2,p1 ;
+0210   1333   inpp r3,p1 ; 
+0211   310c   or r1,r3 ;
+0212   1135   outpp r1,p1 ;
+0213   0037   bra a_wend ;
+0214   0019
+0215   3313   a_w7: cmprv r3,"e" ; 
+0216   0065
+0217   9037   bra ne,a_w8 ;
+0218   0007
+0219   211a   mvrp r2,p1 ;
+021a   1333   inpp r3,p1 ; 
+021b   310e   xor r1,r3 ;
+021c   1135   outpp r1,p1 ;
+021d   0037   bra a_wend ;
+021e   000f
+021f   3313   a_w8: cmprv r3,"m" ; 
+0220   006d
+0221   9037   bra ne,a_wend ;
+0222   000b
+0223   012d   ldp p1,inpaddr ;
+0224   1185
+0225   0320   ldr r3,memop ;
+0226   119c
+0227   030b   andv r3,3 ;
+0228   0003
+0229   1037   bra z,a_w9 ;
+022a   0002
+022b   2026   ldmam m2 ; 
+022c   1129   a_w9: strp r1,p1 ;
+022d   0026   a_wend: ldmam m0 ; 
+022e   003b   jsr tx_prmt ;
+022f   0399
+0230   003b   jsr tx_prmt ;
+0231   0399
+0232   003c   rts ; 
+0233   0000   a_quit: nop ;
+0234   003b   jsr tx_prmt ;
+0235   0399
+0236   003c   rts ; 
+0237   853e   memnext: uflag t5 ; 
+0238   012d   ldp p1,memptr ;
+0239   117e
+023a   102f   stp p1,memptrlast ;
+023b   117f
+023c   0039   jmp memdump0 ;
+023d   0240
+023e   012d   memdump: ldp p1,memptrlast ;
+023f   117f
+0240   121b   memdump0: mvpr p1,r2 ; 
+0241   003b   jsr dishex4 ; 
+0242   042e
+0243   003b   jsr tx_prmt ; 
+0244   0399
+0245   0026   ldmam m0 ; 
+0246   021f   ldcv c2,15 ; 
+0247   000f
+0248   0120   ldr r1,memode ;
+0249   1192
+024a   110c   or r1,r1 ;
+024b   9037   bra nz,memdumb1 ;
+024c   001b
+024d   011f   memdumw1: ldcv c1,7 ; 
+024e   0007
+024f   0120   memdumw2: ldr r1,memop ;
+0250   119c
+0251   010b   andv r1,3 ;
+0252   0003
+0253   1037   bra z,rdmemw ;
+0254   0002
+0255   1026   ldmam m1 ; 
+0256   1224   rdmemw: ldrpi r2,p1 ;
+0257   0026   ldmam m0 ; 
+0258   003b   jsr dishex4 ; 
+0259   042e
+025a   0138   dcjnz c1,memdumw2 ;
+025b   024f
+025c   003b   jsr tx_prmt ;
+025d   0399
+025e   0238   dcjnz c2,memdumw1 ;
+025f   024d
+0260   0539   jmp f5,memdum4 ;
+0261   0288
+0262   102f   stp p1,memptr ;
+0263   117e
+0264   053e   uflag f5 ;
+0265   0039   jmp memdum4 ;
+0266   0288
+0267   011f   memdumb1: ldcv c1,7 ; 
+0268   0007
+0269   0120   memdumb2: ldr r1,memop ;
+026a   119c
+026b   010b   andv r1,3 ;
+026c   0003
+026d   1037   bra z,rdmemb ;
+026e   0002
+026f   1026   ldmam m1 ; 
+0270   330e   rdmemb: xor r3,r3 ;
+0271   1224   ldrpi r2,p1 ; 
+0272   230c   or r3,r2 ;
+0273   1224   ldrpi r2,p1 ;
+0274   0217   shl4 r2 ;
+0275   0217   shl4 r2 ;
+0276   230c   or r3,r2 ;
+0277   321d   swap r3,r2 ;
+0278   0026   ldmam m0 ; 
+0279   003b   jsr dishex4 ; 
+027a   042e
+027b   0138   dcjnz c1,memdumb2 ;
+027c   0269
+027d   003b   jsr tx_prmt ;
+027e   0399
+027f   0238   dcjnz c2,memdumb1 ;
+0280   0267
+0281   0539   jmp f5,memdum4 ;
+0282   0288
+0283   102f   stp p1,memptr ;
+0284   117e
+0285   053e   uflag f5 ;
+0286   0039   jmp memdum4 ;
+0287   0288
+0288   003b   memdum4: jsr tx_prmt ;
+0289   0399
+028a   003c   rts ; 
+028b   012e   vardump: ldpv p1,varchk ;
+028c   118d
+028d   121b   vardump0: mvpr p1,r2 ; 
+028e   003b   jsr dishex4 ; 
+028f   042e
+0290   003b   jsr tx_prmt ; 
+0291   0399
+0292   0026   ldmam m0 ; 
+0293   021f   ldcv c2,7 ; 
+0294   0007
+0295   011f   vardum1: ldcv c1,7 ; 
+0296   0007
+0297   1224   vardum2: ldrpi r2,p1 ;
+0298   003b   jsr dishex4 ; 
+0299   042e
+029a   0138   dcjnz c1,vardum2 ;
+029b   0297
+029c   003b   jsr tx_prmt ;
+029d   0399
+029e   0238   dcjnz c2,vardum1 ;
+029f   0295
+02a0   102f   stp p1,memptr ;
+02a1   117e
+02a2   003b   jsr tx_prmt ;
+02a3   0399
+02a4   003c   rts ; 
+02a5   0c2e   setpar1: ldpv pC,hexval4_m ; 
+02a6   067f
+02a7   003b   jsr tx_line ;
+02a8   0352
+02a9   003b   jsr asc2hex ; 
+02aa   03e9
+02ab   3028   str r3,buff_len ; 
+02ac   118e
+02ad   372a   strx r3,p7,IR_IX_LN ; 
+02ae   0001
+02af   2028   str r2,buff_addr ; 
+02b0   118d
+02b1   372a   strx r3,p7,IR_IX ; 
+02b2   0002
+02b3   003b   jsr tx_prmt ;
+02b4   0399
+02b5   003c   rts ; 
+02b6   0c2e   setpar2: ldpv pC,hexval4_m ; 
+02b7   067f
+02b8   003b   jsr tx_line ;
+02b9   0352
+02ba   003b   jsr asc2hex ; 
+02bb   03e9
+02bc   030b   andv r3,'h0007 ; 
+02bd   0007
+02be   372a   strx r3,p7,SR_IX ; 
+02bf   0000
+02c0   3042   ldpag r3 ; 
+02c1   2028   str r2,buff_addrx ; 
+02c2   118f
+02c3   372a   strx r3,p7,ER_IX ; 
+02c4   0003
+02c5   003b   jsr tx_prmt ;
+02c6   0399
+02c7   003c   rts ; 
+02c8   012d   bufdump: ldp p1,buff_addr ;
+02c9   118d
+02ca   121b   bufdump0: mvpr p1,r2 ; 
+02cb   003b   jsr dishex4 ; 
+02cc   042e
+02cd   003b   jsr tx_prmt ; 
+02ce   0399
+02cf   0026   ldmam m0 ; 
+02d0   0520   ldr r5,buff_len ;
+02d1   118e
+02d2   5243   ldc c2,r5 ;
+02d3   011f   bufdum1: ldcv c1,7 ; 
+02d4   0007
+02d5   1224   bufdum2: ldrpi r2,p1 ;
+02d6   003b   jsr dishex4 ; 
+02d7   042e
+02d8   0138   dcjnz c1,bufdum2 ;
+02d9   02d5
+02da   003b   jsr tx_prmt ;
+02db   0399
+02dc   0238   dcjnz c2,bufdum1 ;
+02dd   02d3
+02de   102f   stp p1,memptr ;
+02df   117e
+02e0   003b   jsr tx_prmt ;
+02e1   0399
+02e2   003c   rts ; 
+02e3   0c2e   memlen: ldpv pC,hexval4_m ; 
+02e4   067f
+02e5   003b   jsr tx_line ;
+02e6   0352
+02e7   003b   jsr asc2hex ; 
+02e8   03e9
+02e9   3028   str r3,buff_len ; 
+02ea   118e
+02eb   2028   str r2,buff_inc ; 
+02ec   1191
+02ed   003b   jsr tx_prmt ;
+02ee   0399
+02ef   003c   rts ; 
+02f0   0c2e   memfill: ldpv pC,hexval4_m ; 
+02f1   067f
+02f2   003b   jsr tx_line ;
+02f3   0352
+02f4   003b   jsr asc2hex ; 
+02f5   03e9
+02f6   3028   str r3,buff_addr ; 
+02f7   118d
+02f8   2028   str r2,buff_value ;
+02f9   1190
+02fa   311a   mvrp r3,p1 ; 
+02fb   0520   ldr r5,buff_inc ; 
+02fc   1191
+02fd   0420   ldr r4,buff_len ; 
+02fe   118e
+02ff   0620   ldr r6,memop ;
+0300   119c
+0301   060b   andv r6,3 ;
+0302   0003
+0303   1037   bra z,memfill2 ;
+0304   0007
+0305   0120   ldr r1,memode ; 
+0306   1192
+0307   2026   ldmam m2 ; 
+0308   110c   or r1,r1 ; 
+0309   9037   bra nz,memfill3 ;
+030a   0008
+030b   212b   memfill2: strpi r2,p1 ; 
+030c   5201   add r2,r5 ;
+030d   0411   dec r4 ;
+030e   9037   bra nz,memfill2 ;
+030f   fffc
+0310   0037   bra memfill4 ;
+0311   000a
+0312   212b   memfill3: strpi r2,p1 ; 
+0313   2319   mvrr r2,r3 ;
+0314   0318   shr4 r3 ; 
+0315   0318   shr4 r3 ;
+0316   312b   strpi r3,p1 ;
+0317   5201   add r2,r5 ;
+0318   0411   dec r4 ;
+0319   9037   bra nz,memfill3 ;
+031a   fff8
+031b   0026   memfill4: ldmam m0 ; 
+031c   003b   jsr tx_prmt ;
+031d   0399
+031e   003c   rts ; 
+031f   2f2b   sesma: strpi r2,pF ;
+0320   3f2b   strpi r3,pF ;
+0321   012d   ldp p1,ssm_pst ;
+0322   1198
+0323   1222   ssm_1: ldrp r2,p1 ;
+0324   220c   or r2,r2 ;
+0325   1037   bra e,ssm_2 ;
+0326   000a
+0327   2112   cmpr r1,r2 ;
+0328   1037   bra e,ssm_2 ;
+0329   0007
+032a   131b   mvpr p1,r3 ; 
+032b   0303   addv r3,4 ;
+032c   0004
+032d   311a   mvrp r3,p1 ;
+032e   0037   bra ssm_1 ;
+032f   fff4
+0330   1223   ssm_2: ldrx r2,p1,1 ; 
+0331   0001
+0332   2213   cmprv r2,"R" ; 
+0333   0052
+0334   1037   bra e,p_rest ;
+0335   0013
+0336   2213   cmprv r2,"J" ; 
+0337   004a
+0338   1037   bra e,p_jump ;
+0339   0009
+033a   2213   cmprv r2,"S" ; 
+033b   0053
+033c   9037   bra ne,ssm_end ;
+033d   000f
+033e   0220   p_save: ldr r2,ssm_pst ; 
+033f   1198
+0340   2028   str r2,ssm_lst ; 
+0341   1199
+0342   1223   p_jump: ldrx r2,p1,3 ; 
+0343   0003
+0344   2028   str r2,ssm_pst ; 
+0345   1198
+0346   0037   bra ssm_end ;
+0347   0005
+0348   0220   p_rest: ldr r2,ssm_lst ;
+0349   1199
+034a   2028   str r2,ssm_pst ;
+034b   1198
+034c   1223   ssm_end: ldrx r2,p1,2 ;
+034d   0002
+034e   211a   mvrp r2,p1 ;
+034f   f325   ldrpd r3,pF ;
+0350   f225   ldrpd r2,pF ;
+0351   013a   ssm_exec: jmpp p1 ; 
+0352   0739   tx_line: jmp f7,tx_ends ;
+0353   0378
+0354   b333   tx_line2: inpp r3,pB ; 
+0355   030b   andv r3,TXEMPT ; 
+0356   0020
+0357   1037   bra z,tx_line2 ; 
+0358   fffc
+0359   c424   tx_char: ldrpi r4,pC ; 
+035a   4413   cmprv r4,NULL ; 
+035b   0000
+035c   1037   bra z,tx_ends ; 
+035d   001b
+035e   4413   cmprv r4,"|" ;
+035f   007c
+0360   9037   bra nz,tx_nxt ;
+0361   000f
+0362   001f   ldcv c0,NUMFILL ; 
+0363   0005
+0364   b333   tx_fill: inpp r3,pB ; 
+0365   030b   andv r3,TXFULL ; 
+0366   0040
+0367   9037   bra nz,tx_fill ; 
+0368   fffc
+0369   0421   ldrv r4,CHARFILL ; 
+036a   002d
+036b   4a35   outpp r4,pA ;
+036c   0038   dcjnz c0,tx_fill ;
+036d   0364
+036e   0037   bra tx_line2 ; 
+036f   ffe5
+0370   4a35   tx_nxt: outpp r4,pA ; 
+0371   b333   inpp r3,pB ; 
+0372   030b   andv r3,TXFULL ; 
+0373   0040
+0374   9037   bra nz,tx_line2 ; 
+0375   ffdf
+0376   0037   bra tx_char ; 
+0377   ffe2
+0378   003c   tx_ends: rts ; 
+0379   0739   tx_page: jmp f7,tx_ends ;
+037a   0378
+037b   003b   tx_page2: jsr tx_line ; 
+037c   0352
+037d   c11b   mvpr pC,r1 ;
+037e   1028   str r1,temp0 ;
+037f   118a
+0380   003b   jsr tx_prmt ; 
+0381   0399
+0382   0120   ldr r1,temp0 ;
+0383   118a
+0384   1c1a   mvrp r1,pC ;
+0385   c322   ldrp r3,pC ; 
+0386   3313   cmprv r3,ETX ; 
+0387   0003
+0388   9037   bra nz,tx_page2 ; 
+0389   fff2
+038a   003c   rts ; 
+038b   0739   tx_prmtcr: jmp f7,tx_ends ;
+038c   0378
+038d   0c2e   ldpv pC,promptcr ; 
+038e   06ad
+038f   003b   jsr tx_line ; 
+0390   0352
+0391   003c   rts ; 
+0392   0739   tx_prmtlf: jmp f7,tx_ends ;
+0393   0378
+0394   0c2e   ldpv pC,promptlf ; 
+0395   06ab
+0396   003b   jsr tx_line ; 
+0397   0352
+0398   003c   rts ; 
+0399   0739   tx_prmt: jmp f7,tx_ends ;
+039a   0378
+039b   0c2e   ldpv pC,prompt ; 
+039c   06aa
+039d   003b   jsr tx_line ; 
+039e   0352
+039f   003c   rts ; 
+03a0   0739   tx_prmtx2: jmp f7,tx_ends ;
+03a1   0378
+03a2   0c2e   ldpv pC,promptx2 ; 
+03a3   06a8
+03a4   003b   jsr tx_line ; 
+03a5   0352
+03a6   003c   rts ; 
+03a7   b133   chkstat: inpp r1,pB ; 
+03a8   010b   andv r1,TXFULL ; 
+03a9   0040
+03aa   9037   bra nz,chkstat ; 
+03ab   fffc
+03ac   003c   rts ; 
+03ad   2f2b   hex2asc: strpi r2,pF ; 
+03ae   020b   andv r2,'h00F ;
+03af   000f
+03b0   2213   cmprv r2,'h00A ;
+03b1   000a
+03b2   d037   bra lt,hex1 ;
+03b3   0003
+03b4   0203   addv r2,'h007 ;
+03b5   0007
+03b6   0203   hex1: addv r2,'h030 ;
+03b7   0030
+03b8   2028   str r2,hex1val ;
+03b9   1180
+03ba   f225   ldrpd r2,pF ; 
+03bb   0218   shr4 r2 ; 
+03bc   020b   andv r2,'h00F ;
+03bd   000f
+03be   2213   cmprv r2,'h00A ;
+03bf   000a
+03c0   d037   bra lt,hex2 ;
+03c1   0003
+03c2   0203   addv r2,'h007 ;
+03c3   0007
+03c4   0203   hex2: addv r2,'h030 ;
+03c5   0030
+03c6   2028   str r2,hex2val ;
+03c7   1181
+03c8   003c   rts ; 
+03c9   1219   tohex2: mvrr r1,r2 ; 
+03ca   010b   andv r1,'h00ff ;
+03cb   00ff
+03cc   0107   subv r1,'h030 ; 
+03cd   0030
+03ce   1113   cmprv r1,9 ;
+03cf   0009
+03d0   f037   bra ls,tohex21 ;
+03d1   0005
+03d2   010b   andv r1,'h000f ;
+03d3   000f
+03d4   0103   addv r1,9 ;
+03d5   0009
+03d6   0218   tohex21: shr4 r2 ;
+03d7   0218   shr4 r2 ;
+03d8   020b   andv r2,'h00ff ;
+03d9   00ff
+03da   0207   subv r2,'h030 ; 
+03db   0030
+03dc   2213   cmprv r2,9 ;
+03dd   0009
+03de   f037   bra ls,tohex22 ;
+03df   0005
+03e0   020b   andv r2,'h000f ;
+03e1   000f
+03e2   0203   addv r2,9 ;
+03e3   0009
+03e4   0217   tohex22: shl4 r2 ;
+03e5   020b   andv r2,'h00f0 ;
+03e6   00f0
+03e7   120c   or r2,r1 ;
+03e8   003c   rts ; 
+03e9   220e   asc2hex: xor r2,r2 ; 
+03ea   330e   xor r3,r3 ; 
+03eb   063e   uflag f6 ;
+03ec   003b   rd_hex1: jsr rdchar ;
+03ed   044c
+03ee   0739   jmp f7,no_out_ch ;
+03ef   03f1
+03f0   1a35   outpp r1,pA ; 
+03f1   1113   no_out_ch: cmprv r1,CR ;
+03f2   000d
+03f3   1037   bra z,rd_hex9 ;
+03f4   0021
+03f5   1113   cmprv r1,LF ;
+03f6   000a
+03f7   1037   bra z,rd_hex9 ;
+03f8   001d
+03f9   1113   cmprv r1,"-" ;
+03fa   002d
+03fb   9037   bra ne,noneg ;
+03fc   0002
+03fd   863e   uflag t6 ;
+03fe   0107   noneg: subv r1,'h030 ; 
+03ff   0030
+0400   3037   bra s,rd_hex1 ; 
+0401   ffeb
+0402   0215   shl l,r2 ;
+0403   1315   shl k,r3 ;
+0404   0215   shl l,r2 ;
+0405   1315   shl k,r3 ;
+0406   0215   shl l,r2 ;
+0407   1315   shl k,r3 ;
+0408   0215   shl l,r2 ;
+0409   1315   shl k,r3 ;
+040a   1113   cmprv r1,9 ;
+040b   0009
+040c   f037   bra ls,rd_hex2 ;
+040d   0005
+040e   010b   andv r1,'h00F ; 
+040f   000f
+0410   0103   addv r1,9 ;
+0411   0009
+0412   120c   rd_hex2: or r2,r1 ;
+0413   0037   bra rd_hex1 ;
+0414   ffd8
+0415   0639   rd_hex9: jmp f6,rd_hexa ;
+0416   041b
+0417   2209   not r2,r2 ;
+0418   3309   not r3,r3 ;
+0419   0203   addv r2,1 ;
+041a   0001
+041b   003c   rd_hexa: rts ;
+041c   0203   disdigit: addv r2,'h30 ; 
+041d   0030
+041e   2a35   outpp r2,pA ; 
+041f   0221   ldrv r2,CR ;
+0420   000d
+0421   2a35   outpp r2,pA ; 
+0422   003c   rts ; 
+0423   2319   dishexs: mvrr r2,r3 ;
+0424   030b   andv r3,SIGNED ;
+0425   8000
+0426   1037   bra z,dishex4 ;
+0427   0007
+0428   2209   not r2 ;
+0429   0203   addv r2,1 ;
+042a   0001
+042b   0321   ldrv r3,"-" ;
+042c   002d
+042d   3a35   outpp r3,pA ; 
+042e   2319   dishex4: mvrr r2,r3 ;
+042f   0218   shr4 r2 ;
+0430   0218   shr4 r2 ;
+0431   003b   jsr hex2asc ;
+0432   03ad
+0433   0120   ldr r1,hex2val ;
+0434   1181
+0435   1a35   outpp r1,pA ;
+0436   003b   jsr chkstat ;
+0437   03a7
+0438   0120   ldr r1,hex1val ;
+0439   1180
+043a   1a35   outpp r1,pA ;
+043b   3219   mvrr r3,r2 ;
+043c   003b   dishex2: jsr hex2asc ;
+043d   03ad
+043e   0120   ldr r1,hex2val ;
+043f   1181
+0440   1a35   outpp r1,pA ;
+0441   003b   jsr chkstat ;
+0442   03a7
+0443   0120   ldr r1,hex1val ;
+0444   1180
+0445   1a35   outpp r1,pA ;
+0446   003b   jsr chkstat ;
+0447   03a7
+0448   0121   ldrv r1,SPC ;
+0449   0020
+044a   1a35   outpp r1,pA ;
+044b   003c   rts ; 
+044c   b133   rdchar: inpp r1,pB ; 
+044d   0141   bitv r1,RXDVLD ; 
+044e   0080
+044f   1037   bra z,rdchar ; 
+0450   fffc
+0451   a133   inpp r1,pA ; 
+0452   010b   andv r1,'hFF ; 
+0453   00ff
+0454   1028   str r1,inpchar ; 
+0455   1184
+0456   003c   rts ; 
+0457   0c2e   setyear: ldpv pC,hexval4_m ; 
+0458   067f
+0459   003b   jsr tx_line ;
+045a   0352
+045b   003b   jsr asc2hex ; 
+045c   03e9
+045d   2028   str r2,tmr1year ;
+045e   119d
+045f   003b   jsr tx_prmt ;
+0460   0399
+0461   003c   rts ; 
+0462   0c2e   setmonth: ldpv pC,hexval4_m ; 
+0463   067f
+0464   003b   jsr tx_line ;
+0465   0352
+0466   003b   jsr asc2hex ; 
+0467   03e9
+0468   2028   str r2,tmr1month ;
+0469   119e
+046a   003b   jsr tx_prmt ;
+046b   0399
+046c   003c   rts ; 
+046d   0c2e   setdate: ldpv pC,hexval4_m ; 
+046e   067f
+046f   003b   jsr tx_line ;
+0470   0352
+0471   003b   jsr asc2hex ; 
+0472   03e9
+0473   2028   str r2,tmr1date ;
+0474   119f
+0475   003b   jsr tx_prmt ;
+0476   0399
+0477   003c   rts ; 
+0478   0c2e   sethour: ldpv pC,hexval4_m ; 
+0479   067f
+047a   003b   jsr tx_line ;
+047b   0352
+047c   003b   jsr asc2hex ; 
+047d   03e9
+047e   2028   str r2,tmr1hour ;
+047f   11a0
+0480   220e   xor r2,r2 ;
+0481   2028   str r2,tmr1min ;
+0482   11a1
+0483   2028   str r2,tmr1sec ;
+0484   11a2
+0485   003b   jsr tx_prmt ;
+0486   0399
+0487   003c   rts ; 
+0488   0c2e   setmin: ldpv pC,hexval4_m ; 
+0489   067f
+048a   003b   jsr tx_line ;
+048b   0352
+048c   003b   jsr asc2hex ; 
+048d   03e9
+048e   2028   str r2,tmr1min ;
+048f   11a1
+0490   220e   xor r2,r2 ;
+0491   2028   str r2,tmr1sec ;
+0492   11a2
+0493   003b   jsr tx_prmt ;
+0494   0399
+0495   003c   rts ; 
+0496   0c2e   setsec: ldpv pC,hexval4_m ; 
+0497   067f
+0498   003b   jsr tx_line ;
+0499   0352
+049a   003b   jsr asc2hex ; 
+049b   03e9
+049c   2028   str r2,tmr1sec ;
+049d   11a2
+049e   003b   jsr tx_prmt ;
+049f   0399
+04a0   003c   rts ; 
+04a1   0c2e   d_scpsrc: ldpv pC,hexval4_m ; 
+04a2   067f
+04a3   003b   jsr tx_line ;
+04a4   0352
+04a5   003b   jsr asc2hex ; 
+04a6   03e9
+04a7   020b   andv r2,'h0003 ; 
+04a8   0003
+04a9   0217   shl4 r2 ;
+04aa   0217   shl4 r2 ;
+04ab   0217   shl4 r2 ;
+04ac   0132   inp r1,GPREG_07 ;
+04ad   0007
+04ae   010b   andv r1,SCOPE_NSK ;
+04af   cfff
+04b0   210c   or r1,r2 ;
+04b1   1034   outp r1,GPREG_07 ;
+04b2   0007
+04b3   003b   jsr tx_prmt ;
+04b4   0399
+04b5   003c   rts ; 
+04b6   0c2e   d_trgsrc: ldpv pC,hexval4_m ; 
+04b7   067f
+04b8   003b   jsr tx_line ;
+04b9   0352
+04ba   003b   jsr asc2hex ; 
+04bb   03e9
+04bc   020b   andv r2,'h0003 ; 
+04bd   0003
+04be   0217   shl4 r2 ;
+04bf   0217   shl4 r2 ;
+04c0   0217   shl4 r2 ;
+04c1   0215   shl r2 ;
+04c2   0215   shl r2 ;
+04c3   0132   inp r1,GPREG_07 ;
+04c4   0007
+04c5   010b   andv r1,TRIGS_NSK ;
+04c6   3fff
+04c7   210c   or r1,r2 ;
+04c8   1034   outp r1,GPREG_07 ;
+04c9   0007
+04ca   003b   jsr tx_prmt ;
+04cb   0399
+04cc   003c   rts ; 
+04cd   0132   d_target: inp r1,GPREG_07 ; 
+04ce   0007
+04cf   010b   andv r1,TARGET_NSK ;
+04d0   fffe
+04d1   010d   orv r1,TARGET_MSK ;
+04d2   0001
+04d3   1034   outp r1,GPREG_07 ;
+04d4   0007
+04d5   001f   ldcv c0,10 ; 
+04d6   000a
+04d7   0000   d_target2: nop ;
+04d8   0000   nop ; 
+04d9   0038   dcjnz c0,d_target2 ;
+04da   04d7
+04db   0000   nop;  
+04dc   010b   andv r1,TARGET_NSK ;
+04dd   fffe
+04de   1034   outp r1,GPREG_07 ;
+04df   0007
+04e0   0c2e   ldpv pC,treset_m ; 
+04e1   0695
+04e2   003b   jsr tx_line ; 
+04e3   0352
+04e4   003b   jsr tx_prmtx2 ;
+04e5   03a0
+04e6   003c   rts ; 
+04e7   0c2e   d_pcode: ldpv pC,hexval4_m ; 
+04e8   067f
+04e9   003b   jsr tx_line ;
+04ea   0352
+04eb   003b   jsr asc2hex ; 
+04ec   03e9
+04ed   020b   andv r2,PCODE_MSK ; 
+04ee   0002
+04ef   0132   inp r1,GPREG_07 ;
+04f0   0007
+04f1   010b   andv r1,PCODE_NSK ;
+04f2   fffd
+04f3   210c   or r1,r2 ;
+04f4   1034   outp r1,GPREG_07 ;
+04f5   0007
+04f6   003b   jsr tx_prmt ;
+04f7   0399
+04f8   003c   rts ; 
+04f9   0c2e   irq_set: ldpv pC,hexval4_m ;
+04fa   067f
+04fb   003b   jsr tx_line ;
+04fc   0352
+04fd   003b   jsr asc2hex ; 
+04fe   03e9
+04ff   2028   str r2,irqmask ; 
+0500   1197
+0501   220c   or r2,r2 ; 
+0502   1037   bra z,irq_dis ;
+0503   0004
+0504   0045   irq_enb: sei ;
+0505   843f   uport t4 ; 
+0506   003c   rts ; 
+0507   0046   irq_dis: cli ;
+0508   043f   uport f4 ; 
+0509   003c   rts ; 
+050a   0c2e   d_pagenum: ldpv pC,hexval4_m ; 
+050b   067f
+050c   003b   jsr tx_line ;
+050d   0352
+050e   003b   d_pagenum2:jsr asc2hex ; 
+050f   03e9
+0510   020b   andv r2,'h0007 ; 
+0511   0007
+0512   272a   strx r2,p7,SR_IX ; 
+0513   0000
+0514   2042   ldpag r2 ; 
+0515   003b   jsr tx_prmt ;
+0516   0399
+0517   003c   d_pagenum3: rts ;
+0518   012d   savebuf: ldp p1,buff_addr ; 
+0519   118d
+051a   022d   ldp p2,buff_addrx ; 
+051b   118f
+051c   0420   ldr r4,buff_len ; 
+051d   118e
+051e   2026   ldmam m2 ; 
+051f   001f   savebuf1: ldcv c0,1 ; 
+0520   0001
+0521   1224   ldrpi r2,p1 ; 
+0522   222b   savebuf2: strpi r2,p2 ; 
+0523   0218   shr4 r2 ;
+0524   0218   shr4 r2 ;
+0525   0038   dcjnz c0,savebuf2 ;
+0526   0522
+0527   0411   dec r4 ;
+0528   9037   bra nz,savebuf1 ;
+0529   fff6
+052a   0026   ldmam m0 ; 
+052b   111b   mvpr p1,r1 ;
+052c   172a   strx r1,p7,IRL_IX ; 
+052d   0004
+052e   211b   mvpr p2,r1 ;
+052f   172a   strx r1,p7,ERL_IX ; 
+0530   0005
+0531   003b   jsr tx_prmt ;
+0532   0399
+0533   003c   rts ; 
+0534   012d   restorebuf: ldp p1,buff_addr ;
+0535   118d
+0536   022d   ldp p2,buff_addrx ; 
+0537   118f
+0538   0420   ldr r4,buff_len ; 
+0539   118e
+053a   1026   ldmam m1 ; 
+053b   330e   restorebuf1:xor r3,r3 ;
+053c   2224   ldrpi r2,p2 ; 
+053d   230c   or r3,r2 ;
+053e   2224   ldrpi r2,p2 ;
+053f   0217   shl4 r2 ;
+0540   0217   shl4 r2 ;
+0541   230c   or r3,r2 ;
+0542   312b   strpi r3,p1 ;
+0543   0411   dec r4 ;
+0544   9037   bra nz,restorebuf1 ;
+0545   fff6
+0546   0026   ldmam m0 ; 
+0547   111b   mvpr p1,r1 ;
+0548   172a   strx r1,p7,IRL_IX ; 
+0549   0004
+054a   211b   mvpr p2,r1 ;
+054b   172a   strx r1,p7,ERL_IX ; 
+054c   0005
+054d   003b   jsr tx_prmt ;
+054e   0399
+054f   003c   rts ; 
+0550   660e   division: xor r6,r6 ; 
+0551   4505   divstart: sub r5,r4 ;
+0552   3037   bra s,divend ;
+0553   0005
+0554   5319   mvrr r5,r3 ; 
+0555   0610   inc r6 ;
+0556   0037   bra divstart ;
+0557   fffa
+0558   003c   divend: rts ;
+0559   883f   hw_irq1: uport t8 ;
+055a   083f   uport f8 ;
+055b   003d   rti ; 
+055c   893f   hw_irq2: uport t9 ;
+055d   093f   hw_irq2_1: uport f9 ;
+055e   003d   rti ; 
+055f   0120   hw_irq3: ldr r1,tmr1msec ;
+0560   1195
+0561   110c   or r1,r1 ;
+0562   1037   bra z,hw_irq3_1 ;
+0563   0006
+0564   0111   dec r1 ;
+0565   1028   str r1,tmr1msec ;
+0566   1195
+0567   0037   bra hw_irq3_2 ;
+0568   0002
+0569   8e3e   hw_irq3_1: uflag tE ; 
+056a   003d   hw_irq3_2: rti ;
+056b   0220   hw_irq4: ldr r2,tmr1min ; 
+056c   11a1
+056d   0320   ldr r3,tmr1hour ; 
+056e   11a0
+056f   0420   ldr r4,tmr1date ; 
+0570   119f
+0571   4719   mvrr r4,r7 ; 
+0572   0520   ldr r5,tmr1month ; 
+0573   119e
+0574   0620   ldr r6,tmr1year ; 
+0575   119d
+0576   0120   ldr r1,tmr1sec ; 
+0577   11a2
+0578   0110   inc r1 ;
+0579   1113   cmprv r1,60 ; 
+057a   003c
+057b   d037   bra lt,hw_irq4_1 ;
+057c   0036
+057d   110e   xor r1,r1 ;
+057e   0210   inc r2 ;
+057f   2213   cmprv r2,60 ; 
+0580   003c
+0581   d037   bra lt,hw_irq4_2 ;
+0582   002e
+0583   220e   xor r2,r2 ;
+0584   8a3e   uflag tA ; 
+0585   0310   inc r3 ;
+0586   3313   cmprv r3,24 ; 
+0587   0018
+0588   d037   bra lt,hw_irq4_3 ;
+0589   0025
+058a   330e   xor r3,r3 ;
+058b   040b   andv r4,'h00ff ;
+058c   00ff
+058d   070b   andv r7,'hff00 ;
+058e   ff00
+058f   0718   shr4 r7 ;
+0590   0718   shr4 r7 ;
+0591   0710   inc r7 ;
+0592   7713   cmprv r7,6 ; 
+0593   0006
+0594   d037   bra lt,hw_irq4_6 ;
+0595   0002
+0596   770e   xor r7,r7 ; 
+0597   0717   hw_irq4_6: shl4 r7 ;
+0598   0717   shl4 r7 ;
+0599   0410   inc r4 ;
+059a   4413   cmprv r4,31 ; 
+059b   001f
+059c   d037   bra lt,hw_irq4_7 ;
+059d   0003
+059e   0421   ldrv r4,1 ;
+059f   0001
+05a0   740c   hw_irq4_7: or r4,r7 ;
+05a1   0510   inc r5 ;
+05a2   5513   cmprv r5,12 ; 
+05a3   000c
+05a4   d037   bra lt,hw_irq4_5 ;
+05a5   0005
+05a6   550e   xor r5,r5 ;
+05a7   0610   inc r6 ;
+05a8   6028   str r6,tmr1year ;
+05a9   119d
+05aa   5028   hw_irq4_5: str r5,tmr1month ;
+05ab   119e
+05ac   4028   hw_irq4_4: str r4,tmr1date ;
+05ad   119f
+05ae   3028   hw_irq4_3: str r3,tmr1hour ;
+05af   11a0
+05b0   2028   hw_irq4_2: str r2,tmr1min ;
+05b1   11a1
+05b2   1028   hw_irq4_1: str r1,tmr1sec ;
+05b3   11a2
+05b4   003d   rti ; 
+05b5   003d   sw_irq1: rti ;
+05b6   003b   myapp: jsr test_arith ;
+05b7   05bb
+05b8   0d2e   ldpv pD,tempvar1 ; 
+05b9   11ed
+05ba   003c   rts ; 
+05bb   0a21   ldrv rA,'h8000 ;
+05bc   8000
+05bd   0b21   ldrv rB,'h8000 ;
+05be   8000
+05bf   ba01   add rA,rB ; 
+05c0   ad2b   strpi rA,pD ;
+05c1   0121   ldrv r1,'h1111 ;
+05c2   1111
+05c3   0221   ldrv r2,'h2222 ;
+05c4   2222
+05c5   1319   mvrr r1,r3 ;
+05c6   1201   add r2,r1 ;
+05c7   2d2b   strpi r2,pD ; 
+05c8   0303   addv r3,'h5555 ;
+05c9   5555
+05ca   3d2b   strpi r3,pD ; 
+05cb   2309   not r2,r3 ; 
+05cc   3d2b   strpi r3,pD ; 
+05cd   2d2b   strpi r2,pD ; 
+05ce   2301   add r3,r2 ;
+05cf   3d2b   strpi r3,pD ; 
+05d0   0121   ldrv r1,'h7777 ;
+05d1   7777
+05d2   0221   ldrv r2,'h8888 ;
+05d3   8888
+05d4   2319   mvrr r2,r3 ;
+05d5   1205   sub r2,r1 ;
+05d6   2d2b   strpi r2,pD ; 
+05d7   0307   subv r3,'h5555 ;
+05d8   5555
+05d9   3d2b   strpi r3,pD ; 
+05da   2309   not r2,r3 ; 
+05db   2d2b   strpi r2,pD ; 
+05dc   3d2b   strpi r3,pD ; 
+05dd   0021   ldrv r0,'hff00 ;
+05de   ff00
+05df   0121   ldrv r1,'h0100 ;
+05e0   0100
+05e1   0219   mvrr r0,r2 ;
+05e2   1319   mvrr r1,r3 ;
+05e3   1001   add r0,r1 ;
+05e4   2302   adc r3,r2 ;
+05e5   0d2b   strpi r0,pD ; 
+05e6   3d2b   strpi r3,pD ; 
+05e7   0021   ldrv r0,'h7777 ;
+05e8   7777
+05e9   0121   ldrv r1,'h8888 ;
+05ea   8888
+05eb   0219   mvrr r0,r2 ;
+05ec   1319   mvrr r1,r3 ;
+05ed   1005   sub r0,r1 ;
+05ee   2306   sbb r3,r2 ;
+05ef   0d2b   strpi r0,pD ; 
+05f0   3d2b   strpi r3,pD ; 
+05f1   0021   ldrv r0,'h7777 ;
+05f2   7777
+05f3   0121   ldrv r1,'h8888 ;
+05f4   8888
+05f5   0219   mvrr r0,r2 ;
+05f6   1319   mvrr r1,r3 ;
+05f7   0105   sub r1,r0 ;
+05f8   3206   sbb r2,r3 ;
+05f9   1d2b   strpi r1,pD ; 
+05fa   2d2b   strpi r2,pD ; 
+05fb   0421   ldrv r4,'h1234 ;
+05fc   1234
+05fd   092e   ldpv p9,'h1111 ;
+05fe   1111
+05ff   9404   addrp r4,p9 ;
+0600   4d2b   strpi r4,pD ; 
+0601   0921   ldrv r9,'h55aa ;
+0602   55aa
+0603   092e   ldpv p9,'h2277 ;
+0604   2277
+0605   9908   subrp r9,p9 ;
+0606   9d2b   strpi r9,pD ; 
+0607   003c   rts ; 
+0608   833e   runapp: uflag t3 ;
+0609   003c   rts ; 
+060a   0053   version_m: dt "SW:030922-03 test_arith_full";
+060b   0057
+060c   003a
+060d   0030
+060e   0033
+060f   0030
+0610   0039
+0611   0032
+0612   0032
+0613   002d
+0614   0030
+0615   0033
+0616   0020
+0617   0074
+0618   0065
+0619   0073
+061a   0074
+061b   005f
+061c   0061
+061d   0072
+061e   0069
+061f   0074
+0620   0068
+0621   005f
+0622   0066
+0623   0075
+0624   006c
+0625   006c
+0626   0000
+0627   0020   memof_m: dt " Internal Memory Access";
+0628   0049
+0629   006e
+062a   0074
+062b   0065
+062c   0072
+062d   006e
+062e   0061
+062f   006c
+0630   0020
+0631   004d
+0632   0065
+0633   006d
+0634   006f
+0635   0072
+0636   0079
+0637   0020
+0638   0041
+0639   0063
+063a   0063
+063b   0065
+063c   0073
+063d   0073
+063e   0000
+063f   0020   memon_m: dt " External Memory Access";
+0640   0045
+0641   0078
+0642   0074
+0643   0065
+0644   0072
+0645   006e
+0646   0061
+0647   006c
+0648   0020
+0649   004d
+064a   0065
+064b   006d
+064c   006f
+064d   0072
+064e   0079
+064f   0020
+0650   0041
+0651   0063
+0652   0063
+0653   0065
+0654   0073
+0655   0073
+0656   0000
+0657   0020   membyte_m: dt " Byte Memory Access";
+0658   0042
+0659   0079
+065a   0074
+065b   0065
+065c   0020
+065d   004d
+065e   0065
+065f   006d
+0660   006f
+0661   0072
+0662   0079
+0663   0020
+0664   0041
+0665   0063
+0666   0063
+0667   0065
+0668   0073
+0669   0073
+066a   0000
+066b   0020   memword_m: dt " Word Memory Access";
+066c   0057
+066d   006f
+066e   0072
+066f   0064
+0670   0020
+0671   004d
+0672   0065
+0673   006d
+0674   006f
+0675   0072
+0676   0079
+0677   0020
+0678   0041
+0679   0063
+067a   0063
+067b   0065
+067c   0073
+067d   0073
+067e   0000
+067f   0020   hexval4_m: dt " Enter value [RET] = ";
+0680   0045
+0681   006e
+0682   0074
+0683   0065
+0684   0072
+0685   0020
+0686   0076
+0687   0061
+0688   006c
+0689   0075
+068a   0065
+068b   0020
+068c   005b
+068d   0052
+068e   0045
+068f   0054
+0690   005d
+0691   0020
+0692   003d
+0693   0020
+0694   0000
+0695   0020   treset_m: dt " Target Reset done";
+0696   0054
+0697   0061
+0698   0072
+0699   0067
+069a   0065
+069b   0074
+069c   0020
+069d   0052
+069e   0065
+069f   0073
+06a0   0065
+06a1   0074
+06a2   0020
+06a3   0064
+06a4   006f
+06a5   006e
+06a6   0065
+06a7   0000
+06a8   000d   promptx2: dw CR; 
+06a9   000a   dw LF; 
+06aa   000d   prompt: dw CR; 
+06ab   000a   promptlf: dw LF; 
+06ac   0000   dw NULL; 
+06ad   000d   promptcr: dw CR; 
+06ae   0000   dw NULL; 
+06af   0001   h2btab: dw 'h0001,'h0002,'h0004,'h0008 ;
+06b0   0002
+06b1   0004
+06b2   0008
+06b3   0010   dw 'h0010,'h0020,'h0040,'h0080 ;
+06b4   0020
+06b5   0040
+06b6   0080
+06b7   0100   dw 'h0100,'h0200,'h0400,'h0800 ;
+06b8   0200
+06b9   0400
+06ba   0800
+06bb   1000   dw 'h1000,'h2000,'h4000,'h8000 ;
+06bc   2000
+06bd   4000
+06be   8000
+06bf   001b   cls_m: dw ESC ; 
+06c0   005b   dt "[2J" ; 
+06c1   0032
+06c2   004a
+06c3   0000
+06c4   0000   dw NULL ; 
+06c5   001b   chome_m: dw ESC ; 
+06c6   005b   dt "[H" ; 
+06c7   0048
+06c8   0000
+06c9   0000   dw NULL ; 
+06ca   0064   kpst00: dw "d" ,"J" , d_debug, kpst10; 
+06cb   004a
+06cc   00ba
+06cd   06fa
+06ce   0073   dw "s" ,"J" , d_sysset, kpst30; 
+06cf   004a
+06d0   00b4
+06d1   0762
+06d2   0061   dw "a" ,"J" , d_appset, kpst40; 
+06d3   004a
+06d4   00ae
+06d5   07a6
+06d6   0076   dw "v" ,"J" , d_prgver, kpst00; 
+06d7   004a
+06d8   0072
+06d9   06ca
+06da   004c   dw "L" ,"J" , BOOT_ADDR,kpst00; 
+06db   004a
+06dc   3f00
+06dd   06ca
+06de   0045   dw "E" ,"J" , echo_on, kpst00; 
+06df   004a
+06e0   0068
+06e1   06ca
+06e2   0065   dw "e" ,"J" , echo_off, kpst00; 
+06e3   004a
+06e4   006d
+06e5   06ca
+06e6   0043   dw "C" ,"J" , enbscreen,kpst00; 
+06e7   004a
+06e8   0095
+06e9   06ca
+06ea   0063   dw "c" ,"J" , disscreen,kpst00; 
+06eb   004a
+06ec   0097
+06ed   06ca
+06ee   0049   dw "I" ,"J" , irq_set, kpst00; 
+06ef   004a
+06f0   04f9
+06f1   06ca
+06f2   006b   dw "k" ,"J" , d_rtcval, kpst00; 
+06f3   004a
+06f4   0080
+06f5   06ca
+06f6   0000   dw NULL ,"J" , d_menu, kpst00; 
+06f7   004a
+06f8   00a8
+06f9   06ca
+06fa   0041   kpst10: dw "A" ,"J" , d_mema, kpst10; 
+06fb   004a
+06fc   00e1
+06fd   06fa
+06fe   0042   dw "B" ,"J" , d_memb, kpst10; 
+06ff   004a
+0700   00fb
+0701   06fa
+0702   0050   dw "P" ,"J", d_pagenum,kpst10; 
+0703   004a
+0704   050a
+0705   06fa
+0706   0064   dw "d" ,"J" , memdump, kpst10; 
+0707   004a
+0708   023e
+0709   06fa
+070a   006e   dw "n" ,"J" , memnext, kpst10; 
+070b   004a
+070c   0237
+070d   06fa
+070e   0066   dw "f" ,"J" , memfill, kpst10; 
+070f   004a
+0710   02f0
+0711   06fa
+0712   006c   dw "l" ,"J" , memlen, kpst10; 
+0713   004a
+0714   02e3
+0715   06fa
+0716   006d   dw "m" ,"S" , s_bitop, wpst01; 
+0717   0053
+0718   011e
+0719   07e2
+071a   0077   dw "w" ,"S" , s_bitop, wpst01; 
+071b   0053
+071c   011e
+071d   07e2
+071e   0073   dw "s" ,"S" , s_bitop wpst01; 
+071f   0053
+0720   011e
+0721   07e2
+0722   0063   dw "c" ,"S" , s_bitop, wpst01; 
+0723   0053
+0724   011e
+0725   07e2
+0726   0074   dw "t" ,"S" , s_bitop, wpst01; 
+0727   0053
+0728   011e
+0729   07e2
+072a   0069   dw "i" ,"S" , s_bitop, wpst01; 
+072b   0053
+072c   011e
+072d   07e2
+072e   0061   dw "a" ,"S" , s_bitop, wpst01; 
+072f   0053
+0730   011e
+0731   07e2
+0732   006f   dw "o" ,"S" , s_bitop, wpst01; 
+0733   0053
+0734   011e
+0735   07e2
+0736   0065   dw "e" ,"S" , s_bitop, wpst01; 
+0737   0053
+0738   011e
+0739   07e2
+073a   0062   dw "b" ,"J" , d_base, kpst10; 
+073b   004a
+073c   010e
+073d   06fa
+073e   0072   dw "r" ,"J" , d_aregs, kpst10; 
+073f   004a
+0740   00cd
+0741   06fa
+0742   0076   dw "v" ,"J" , vardump, kpst10; 
+0743   004a
+0744   028b
+0745   06fa
+0746   0068   dw "h" ,"J" , d_help, kpst10; 
+0747   004a
+0748   00c1
+0749   06fa
+074a   0078   dw "x" ,"J" , d_menu, kpst00; 
+074b   004a
+074c   00a8
+074d   06ca
+074e   0020   dw " " ,"J" , d_debug, kpst10;
+074f   004a
+0750   00ba
+0751   06fa
+0752   0000   dw NULL ,"J" , d_nothing,kpst10;
+0753   004a
+0754   011d
+0755   06fa
+0756   0068   kpst20: dw "h" ,"J" , d_help, kpst20; 
+0757   004a
+0758   00c1
+0759   0756
+075a   0078   dw "x" ,"J" , d_menu, kpst00; 
+075b   004a
+075c   00a8
+075d   06ca
+075e   0000   dw NULL ,"J" , d_help, kpst20; 
+075f   004a
+0760   00c1
+0761   0756
+0762   0073   kpst30: dw "s" ,"J", d_scpsrc, kpst30; 
+0763   004a
+0764   04a1
+0765   0762
+0766   0074   dw "t" ,"J", d_trgsrc, kpst30; 
+0767   004a
+0768   04b6
+0769   0762
+076a   0062   dw "b" ,"J", d_base, kpst30; 
+076b   004a
+076c   010e
+076d   0762
+076e   0072   dw "r" ,"J", d_aregs, kpst30; 
+076f   004a
+0770   00cd
+0771   0762
+0772   0077   dw "w" ,"S", s_bitop, wpst01; 
+0773   0053
+0774   011e
+0775   07e2
+0776   0052   dw "R" ,"J", d_target, kpst30; 
+0777   004a
+0778   04cd
+0779   0762
+077a   0057   dw "W" ,"J", d_pcode, kpst30; 
+077b   004a
+077c   04e7
+077d   0762
+077e   0059   dw "Y" ,"J", setyear, kpst30; 
+077f   004a
+0780   0457
+0781   0762
+0782   004d   dw "M" ,"J", setmonth, kpst30; 
+0783   004a
+0784   0462
+0785   0762
+0786   0044   dw "D" ,"J", setdate, kpst30; 
+0787   004a
+0788   046d
+0789   0762
+078a   0048   dw "H" ,"J", sethour, kpst30; 
+078b   004a
+078c   0478
+078d   0762
+078e   0055   dw "U" ,"J", setmin, kpst30; 
+078f   004a
+0790   0488
+0791   0762
+0792   0053   dw "S" ,"J", setsec, kpst30; 
+0793   004a
+0794   0496
+0795   0762
+0796   006b   dw "k" ,"J", d_rtcval, kpst30; 
+0797   004a
+0798   0080
+0799   0762
+079a   0076   dw "v" ,"J", vardump, kpst30; 
+079b   004a
+079c   028b
+079d   0762
+079e   0078   dw "x" ,"J", d_menu, kpst00; 
+079f   004a
+07a0   00a8
+07a1   06ca
+07a2   0000   dw NULL,"J", d_sysset, kpst30; 
+07a3   004a
+07a4   00b4
+07a5   0762
+07a6   0061   kpst40: dw "a" ,"J", runapp, kpst40; 
+07a7   004a
+07a8   0608
+07a9   07a6
+07aa   0031   dw "1" ,"J", setpar1, kpst40; 
+07ab   004a
+07ac   02a5
+07ad   07a6
+07ae   0032   dw "2" ,"J", setpar2, kpst40; 
+07af   004a
+07b0   02b6
+07b1   07a6
+07b2   0064   dw "d" ,"J" , bufdump, kpst40; 
+07b3   004a
+07b4   02c8
+07b5   07a6
+07b6   0053   dw "S" ,"J", savebuf, kpst40; 
+07b7   004a
+07b8   0518
+07b9   07a6
+07ba   0052   dw "R" ,"J", restorebuf, kpst40; 
+07bb   004a
+07bc   0534
+07bd   07a6
+07be   006b   dw "k" ,"J", d_rtcval, kpst40; 
+07bf   004a
+07c0   0080
+07c1   07a6
+07c2   0072   dw "r" ,"J", d_aregs, kpst40; 
+07c3   004a
+07c4   00cd
+07c5   07a6
+07c6   0076   dw "v" ,"J", vardump, kpst40; 
+07c7   004a
+07c8   028b
+07c9   07a6
+07ca   0068   dw "h" ,"J", d_helpa, kpst40; 
+07cb   004a
+07cc   00c7
+07cd   07a6
+07ce   0078   dw "x" ,"J", d_menu, kpst00; 
+07cf   004a
+07d0   00a8
+07d1   06ca
+07d2   0000   dw NULL,"J", d_appset, kpst40; 
+07d3   004a
+07d4   00ae
+07d5   07a6
+07d6   000d   wpst00: dw CR ,"R" , a_quit, kpst00; 
+07d7   0052
+07d8   0233
+07d9   06ca
+07da   0071   dw "q" ,"R" , a_quit, kpst00; 
+07db   0052
+07dc   0233
+07dd   06ca
+07de   0000   dw NULL ,"J" , a_regdat, wpst00; 
+07df   004a
+07e0   0181
+07e1   07d6
+07e2   002c   wpst01: dw "," ,"J" , a_setadd, wpst02; 
+07e3   004a
+07e4   0165
+07e5   07fe
+07e6   0020   dw " " ,"J" , a_setadd, wpst02; 
+07e7   004a
+07e8   0165
+07e9   07fe
+07ea   002d   dw "-" ,"J" , a_setadd, wpst03; 
+07eb   004a
+07ec   0165
+07ed   080a
+07ee   006e   dw "n" ,"J" , a_setadd, wpst03; 
+07ef   004a
+07f0   0165
+07f1   080a
+07f2   000d   dw CR ,"R" , a_getval, kpst00; 
+07f3   0052
+07f4   0141
+07f5   06ca
+07f6   0071   dw "q" ,"R" , a_quit, kpst00; 
+07f7   0052
+07f8   0233
+07f9   06ca
+07fa   0000   dw NULL ,"J" , a_getadr, wpst01; 
+07fb   004a
+07fc   012c
+07fd   07e2
+07fe   000d   wpst02: dw CR ,"R" , a_wrval1, kpst00; 
+07ff   0052
+0800   0184
+0801   06ca
+0802   0071   dw "q" ,"R" , a_quit, kpst00; 
+0803   0052
+0804   0233
+0805   06ca
+0806   0000   dw NULL ,"J" , a_regdat, wpst02; 
+0807   004a
+0808   0181
+0809   07fe
+080a   000d   wpst03: dw CR ,"R" , a_wrval2, kpst00; 
+080b   0052
+080c   0189
+080d   06ca
+080e   0071   dw "q" ,"R" , a_quit, kpst00; 
+080f   0052
+0810   0233
+0811   06ca
+0812   0000   dw NULL ,"J" , a_regdat, wpst03; 
+0813   004a
+0814   0181
+0815   080a
+0816   007c   menu: dt "|Main Menu|";
+0817   004d
+0818   0061
+0819   0069
+081a   006e
+081b   0020
+081c   004d
+081d   0065
+081e   006e
+081f   0075
+0820   007c
+0821   0000
+0822   0020   dt " a = application";
+0823   0061
+0824   0020
+0825   003d
+0826   0020
+0827   0061
+0828   0070
+0829   0070
+082a   006c
+082b   0069
+082c   0063
+082d   0061
+082e   0074
+082f   0069
+0830   006f
+0831   006e
+0832   0000
+0833   0020   dt " s = system setup";
+0834   0073
+0835   0020
+0836   003d
+0837   0020
+0838   0073
+0839   0079
+083a   0073
+083b   0074
+083c   0065
+083d   006d
+083e   0020
+083f   0073
+0840   0065
+0841   0074
+0842   0075
+0843   0070
+0844   0000
+0845   0020   dt " d = debug";
+0846   0064
+0847   0020
+0848   003d
+0849   0020
+084a   0064
+084b   0065
+084c   0062
+084d   0075
+084e   0067
+084f   0000
+0850   0020   dt " v = version";
+0851   0076
+0852   0020
+0853   003d
+0854   0020
+0855   0076
+0856   0065
+0857   0072
+0858   0073
+0859   0069
+085a   006f
+085b   006e
+085c   0000
+085d   0020   dt " E = Echo ON";
+085e   0045
+085f   0020
+0860   003d
+0861   0020
+0862   0045
+0863   0063
+0864   0068
+0865   006f
+0866   0020
+0867   004f
+0868   004e
+0869   0000
+086a   0020   dt " e = echo OFF";
+086b   0065
+086c   0020
+086d   003d
+086e   0020
+086f   0065
+0870   0063
+0871   0068
+0872   006f
+0873   0020
+0874   004f
+0875   0046
+0876   0046
+0877   0000
+0878   0020   dt " C = Clear screen/Home ON";
+0879   0043
+087a   0020
+087b   003d
+087c   0020
+087d   0043
+087e   006c
+087f   0065
+0880   0061
+0881   0072
+0882   0020
+0883   0073
+0884   0063
+0885   0072
+0886   0065
+0887   0065
+0888   006e
+0889   002f
+088a   0048
+088b   006f
+088c   006d
+088d   0065
+088e   0020
+088f   004f
+0890   004e
+0891   0000
+0892   0020   dt " c = Clear screen/Home OFF";
+0893   0063
+0894   0020
+0895   003d
+0896   0020
+0897   0043
+0898   006c
+0899   0065
+089a   0061
+089b   0072
+089c   0020
+089d   0073
+089e   0063
+089f   0072
+08a0   0065
+08a1   0065
+08a2   006e
+08a3   002f
+08a4   0048
+08a5   006f
+08a6   006d
+08a7   0065
+08a8   0020
+08a9   004f
+08aa   0046
+08ab   0046
+08ac   0000
+08ad   0020   dt " I = IRQ mask";
+08ae   0049
+08af   0020
+08b0   003d
+08b1   0020
+08b2   0049
+08b3   0052
+08b4   0051
+08b5   0020
+08b6   006d
+08b7   0061
+08b8   0073
+08b9   006b
+08ba   0000
+08bb   0020   dt " k = display clock ";
+08bc   006b
+08bd   0020
+08be   003d
+08bf   0020
+08c0   0064
+08c1   0069
+08c2   0073
+08c3   0070
+08c4   006c
+08c5   0061
+08c6   0079
+08c7   0020
+08c8   0063
+08c9   006c
+08ca   006f
+08cb   0063
+08cc   006b
+08cd   0020
+08ce   0000
+08cf   0020   dt " L = Load Program *.mem";
+08d0   004c
+08d1   0020
+08d2   003d
+08d3   0020
+08d4   004c
+08d5   006f
+08d6   0061
+08d7   0064
+08d8   0020
+08d9   0050
+08da   0072
+08db   006f
+08dc   0067
+08dd   0072
+08de   0061
+08df   006d
+08e0   0020
+08e1   002a
+08e2   002e
+08e3   006d
+08e4   0065
+08e5   006d
+08e6   0000
+08e7   007c   dt "|||";
+08e8   007c
+08e9   007c
+08ea   0000
+08eb   0003   dw ETX;
+08ec   007c   debug_m: dt "|Memory/Register/IO Menu|";
+08ed   004d
+08ee   0065
+08ef   006d
+08f0   006f
+08f1   0072
+08f2   0079
+08f3   002f
+08f4   0052
+08f5   0065
+08f6   0067
+08f7   0069
+08f8   0073
+08f9   0074
+08fa   0065
+08fb   0072
+08fc   002f
+08fd   0049
+08fe   004f
+08ff   0020
+0900   004d
+0901   0065
+0902   006e
+0903   0075
+0904   007c
+0905   0000
+0906   0020   dt " A = memory Access mode";
+0907   0041
+0908   0020
+0909   003d
+090a   0020
+090b   006d
+090c   0065
+090d   006d
+090e   006f
+090f   0072
+0910   0079
+0911   0020
+0912   0041
+0913   0063
+0914   0063
+0915   0065
+0916   0073
+0917   0073
+0918   0020
+0919   006d
+091a   006f
+091b   0064
+091c   0065
+091d   0000
+091e   0020   dt " B = memory Byte mode";
+091f   0042
+0920   0020
+0921   003d
+0922   0020
+0923   006d
+0924   0065
+0925   006d
+0926   006f
+0927   0072
+0928   0079
+0929   0020
+092a   0042
+092b   0079
+092c   0074
+092d   0065
+092e   0020
+092f   006d
+0930   006f
+0931   0064
+0932   0065
+0933   0000
+0934   0020   dt " P = external memory Page";
+0935   0050
+0936   0020
+0937   003d
+0938   0020
+0939   0065
+093a   0078
+093b   0074
+093c   0065
+093d   0072
+093e   006e
+093f   0061
+0940   006c
+0941   0020
+0942   006d
+0943   0065
+0944   006d
+0945   006f
+0946   0072
+0947   0079
+0948   0020
+0949   0050
+094a   0061
+094b   0067
+094c   0065
+094d   0000
+094e   0020   dt " m = Memory write/read";
+094f   006d
+0950   0020
+0951   003d
+0952   0020
+0953   004d
+0954   0065
+0955   006d
+0956   006f
+0957   0072
+0958   0079
+0959   0020
+095a   0077
+095b   0072
+095c   0069
+095d   0074
+095e   0065
+095f   002f
+0960   0072
+0961   0065
+0962   0061
+0963   0064
+0964   0000
+0965   0020   dt " d = Memory dump";
+0966   0064
+0967   0020
+0968   003d
+0969   0020
+096a   004d
+096b   0065
+096c   006d
+096d   006f
+096e   0072
+096f   0079
+0970   0020
+0971   0064
+0972   0075
+0973   006d
+0974   0070
+0975   0000
+0976   0020   dt " n = Next dump";
+0977   006e
+0978   0020
+0979   003d
+097a   0020
+097b   004e
+097c   0065
+097d   0078
+097e   0074
+097f   0020
+0980   0064
+0981   0075
+0982   006d
+0983   0070
+0984   0000
+0985   0020   dt " f = fill memory address/value (AAAA,vvvv)";
+0986   0066
+0987   0020
+0988   003d
+0989   0020
+098a   0066
+098b   0069
+098c   006c
+098d   006c
+098e   0020
+098f   006d
+0990   0065
+0991   006d
+0992   006f
+0993   0072
+0994   0079
+0995   0020
+0996   0061
+0997   0064
+0998   0064
+0999   0072
+099a   0065
+099b   0073
+099c   0073
+099d   002f
+099e   0076
+099f   0061
+09a0   006c
+09a1   0075
+09a2   0065
+09a3   0020
+09a4   0028
+09a5   0041
+09a6   0041
+09a7   0041
+09a8   0041
+09a9   002c
+09aa   0076
+09ab   0076
+09ac   0076
+09ad   0076
+09ae   0029
+09af   0000
+09b0   0020   dt " l = set length/increment (LLLL,iiii)";
+09b1   006c
+09b2   0020
+09b3   003d
+09b4   0020
+09b5   0073
+09b6   0065
+09b7   0074
+09b8   0020
+09b9   006c
+09ba   0065
+09bb   006e
+09bc   0067
+09bd   0074
+09be   0068
+09bf   002f
+09c0   0069
+09c1   006e
+09c2   0063
+09c3   0072
+09c4   0065
+09c5   006d
+09c6   0065
+09c7   006e
+09c8   0074
+09c9   0020
+09ca   0028
+09cb   004c
+09cc   004c
+09cd   004c
+09ce   004c
+09cf   002c
+09d0   0069
+09d1   0069
+09d2   0069
+09d3   0069
+09d4   0029
+09d5   0000
+09d6   0000   dt "";
+09d7   0020   dt " w = Write/read port/register";
+09d8   0077
+09d9   0020
+09da   003d
+09db   0020
+09dc   0057
+09dd   0072
+09de   0069
+09df   0074
+09e0   0065
+09e1   002f
+09e2   0072
+09e3   0065
+09e4   0061
+09e5   0064
+09e6   0020
+09e7   0070
+09e8   006f
+09e9   0072
+09ea   0074
+09eb   002f
+09ec   0072
+09ed   0065
+09ee   0067
+09ef   0069
+09f0   0073
+09f1   0074
+09f2   0065
+09f3   0072
+09f4   0000
+09f5   0020   dt " s = Set reg bit";
+09f6   0073
+09f7   0020
+09f8   003d
+09f9   0020
+09fa   0053
+09fb   0065
+09fc   0074
+09fd   0020
+09fe   0072
+09ff   0065
+0a00   0067
+0a01   0020
+0a02   0062
+0a03   0069
+0a04   0074
+0a05   0000
+0a06   0020   dt " c = Clear reg bit";
+0a07   0063
+0a08   0020
+0a09   003d
+0a0a   0020
+0a0b   0043
+0a0c   006c
+0a0d   0065
+0a0e   0061
+0a0f   0072
+0a10   0020
+0a11   0072
+0a12   0065
+0a13   0067
+0a14   0020
+0a15   0062
+0a16   0069
+0a17   0074
+0a18   0000
+0a19   0020   dt " t = Toggle reg bit";
+0a1a   0074
+0a1b   0020
+0a1c   003d
+0a1d   0020
+0a1e   0054
+0a1f   006f
+0a20   0067
+0a21   0067
+0a22   006c
+0a23   0065
+0a24   0020
+0a25   0072
+0a26   0065
+0a27   0067
+0a28   0020
+0a29   0062
+0a2a   0069
+0a2b   0074
+0a2c   0000
+0a2d   0020   dt " i = Pulse reg bit";
+0a2e   0069
+0a2f   0020
+0a30   003d
+0a31   0020
+0a32   0050
+0a33   0075
+0a34   006c
+0a35   0073
+0a36   0065
+0a37   0020
+0a38   0072
+0a39   0065
+0a3a   0067
+0a3b   0020
+0a3c   0062
+0a3d   0069
+0a3e   0074
+0a3f   0000
+0a40   0020   dt " a = and";
+0a41   0061
+0a42   0020
+0a43   003d
+0a44   0020
+0a45   0061
+0a46   006e
+0a47   0064
+0a48   0000
+0a49   0020   dt " o = or";
+0a4a   006f
+0a4b   0020
+0a4c   003d
+0a4d   0020
+0a4e   006f
+0a4f   0072
+0a50   0000
+0a51   0020   dt " e = xor";
+0a52   0065
+0a53   0020
+0a54   003d
+0a55   0020
+0a56   0078
+0a57   006f
+0a58   0072
+0a59   0000
+0a5a   0000   dt "";
+0a5b   0020   dt " b = set Base I/O/Registers address";
+0a5c   0062
+0a5d   0020
+0a5e   003d
+0a5f   0020
+0a60   0073
+0a61   0065
+0a62   0074
+0a63   0020
+0a64   0042
+0a65   0061
+0a66   0073
+0a67   0065
+0a68   0020
+0a69   0049
+0a6a   002f
+0a6b   004f
+0a6c   002f
+0a6d   0052
+0a6e   0065
+0a6f   0067
+0a70   0069
+0a71   0073
+0a72   0074
+0a73   0065
+0a74   0072
+0a75   0073
+0a76   0020
+0a77   0061
+0a78   0064
+0a79   0064
+0a7a   0072
+0a7b   0065
+0a7c   0073
+0a7d   0073
+0a7e   0000
+0a7f   0020   dt " r = Read all Input ports/registers";
+0a80   0072
+0a81   0020
+0a82   003d
+0a83   0020
+0a84   0052
+0a85   0065
+0a86   0061
+0a87   0064
+0a88   0020
+0a89   0061
+0a8a   006c
+0a8b   006c
+0a8c   0020
+0a8d   0049
+0a8e   006e
+0a8f   0070
+0a90   0075
+0a91   0074
+0a92   0020
+0a93   0070
+0a94   006f
+0a95   0072
+0a96   0074
+0a97   0073
+0a98   002f
+0a99   0072
+0a9a   0065
+0a9b   0067
+0a9c   0069
+0a9d   0073
+0a9e   0074
+0a9f   0065
+0aa0   0072
+0aa1   0073
+0aa2   0000
+0aa3   0020   dt " v = display variables";
+0aa4   0076
+0aa5   0020
+0aa6   003d
+0aa7   0020
+0aa8   0064
+0aa9   0069
+0aaa   0073
+0aab   0070
+0aac   006c
+0aad   0061
+0aae   0079
+0aaf   0020
+0ab0   0076
+0ab1   0061
+0ab2   0072
+0ab3   0069
+0ab4   0061
+0ab5   0062
+0ab6   006c
+0ab7   0065
+0ab8   0073
+0ab9   0000
+0aba   0000   dt "";
+0abb   0020   dt " h = HELP";
+0abc   0068
+0abd   0020
+0abe   003d
+0abf   0020
+0ac0   0048
+0ac1   0045
+0ac2   004c
+0ac3   0050
+0ac4   0000
+0ac5   0020   dt " x = exit";
+0ac6   0078
+0ac7   0020
+0ac8   003d
+0ac9   0020
+0aca   0065
+0acb   0078
+0acc   0069
+0acd   0074
+0ace   0000
+0acf   007c   dt "||||";
+0ad0   007c
+0ad1   007c
+0ad2   007c
+0ad3   0000
+0ad4   0003   dw ETX;
+0ad5   007c   sysset_m:dt "|System Setup|";
+0ad6   0053
+0ad7   0079
+0ad8   0073
+0ad9   0074
+0ada   0065
+0adb   006d
+0adc   0020
+0add   0053
+0ade   0065
+0adf   0074
+0ae0   0075
+0ae1   0070
+0ae2   007c
+0ae3   0000
+0ae4   0020   dt " t = trigger source ( 0 to 3)";
+0ae5   0074
+0ae6   0020
+0ae7   003d
+0ae8   0020
+0ae9   0074
+0aea   0072
+0aeb   0069
+0aec   0067
+0aed   0067
+0aee   0065
+0aef   0072
+0af0   0020
+0af1   0073
+0af2   006f
+0af3   0075
+0af4   0072
+0af5   0063
+0af6   0065
+0af7   0020
+0af8   0028
+0af9   0020
+0afa   0030
+0afb   0020
+0afc   0074
+0afd   006f
+0afe   0020
+0aff   0033
+0b00   0029
+0b01   0000
+0b02   0020   dt " s = scope Source ( 0 to 3)";
+0b03   0073
+0b04   0020
+0b05   003d
+0b06   0020
+0b07   0073
+0b08   0063
+0b09   006f
+0b0a   0070
+0b0b   0065
+0b0c   0020
+0b0d   0053
+0b0e   006f
+0b0f   0075
+0b10   0072
+0b11   0063
+0b12   0065
+0b13   0020
+0b14   0028
+0b15   0020
+0b16   0030
+0b17   0020
+0b18   0074
+0b19   006f
+0b1a   0020
+0b1b   0033
+0b1c   0029
+0b1d   0000
+0b1e   0000   dt "";
+0b1f   0020   dt " b = set Base reg address";
+0b20   0062
+0b21   0020
+0b22   003d
+0b23   0020
+0b24   0073
+0b25   0065
+0b26   0074
+0b27   0020
+0b28   0042
+0b29   0061
+0b2a   0073
+0b2b   0065
+0b2c   0020
+0b2d   0072
+0b2e   0065
+0b2f   0067
+0b30   0020
+0b31   0061
+0b32   0064
+0b33   0064
+0b34   0072
+0b35   0065
+0b36   0073
+0b37   0073
+0b38   0000
+0b39   0020   dt " r = Read all registers";
+0b3a   0072
+0b3b   0020
+0b3c   003d
+0b3d   0020
+0b3e   0052
+0b3f   0065
+0b40   0061
+0b41   0064
+0b42   0020
+0b43   0061
+0b44   006c
+0b45   006c
+0b46   0020
+0b47   0072
+0b48   0065
+0b49   0067
+0b4a   0069
+0b4b   0073
+0b4c   0074
+0b4d   0065
+0b4e   0072
+0b4f   0073
+0b50   0000
+0b51   0020   dt " w = Write/read port/register";
+0b52   0077
+0b53   0020
+0b54   003d
+0b55   0020
+0b56   0057
+0b57   0072
+0b58   0069
+0b59   0074
+0b5a   0065
+0b5b   002f
+0b5c   0072
+0b5d   0065
+0b5e   0061
+0b5f   0064
+0b60   0020
+0b61   0070
+0b62   006f
+0b63   0072
+0b64   0074
+0b65   002f
+0b66   0072
+0b67   0065
+0b68   0067
+0b69   0069
+0b6a   0073
+0b6b   0074
+0b6c   0065
+0b6d   0072
+0b6e   0000
+0b6f   0000   dt "";
+0b70   0020   dt " Y = Year";
+0b71   0059
+0b72   0020
+0b73   003d
+0b74   0020
+0b75   0059
+0b76   0065
+0b77   0061
+0b78   0072
+0b79   0000
+0b7a   0020   dt " M = Month";
+0b7b   004d
+0b7c   0020
+0b7d   003d
+0b7e   0020
+0b7f   004d
+0b80   006f
+0b81   006e
+0b82   0074
+0b83   0068
+0b84   0000
+0b85   0020   dt " D = day/DATE";
+0b86   0044
+0b87   0020
+0b88   003d
+0b89   0020
+0b8a   0064
+0b8b   0061
+0b8c   0079
+0b8d   002f
+0b8e   0044
+0b8f   0041
+0b90   0054
+0b91   0045
+0b92   0000
+0b93   0020   dt " H = Hour";
+0b94   0048
+0b95   0020
+0b96   003d
+0b97   0020
+0b98   0048
+0b99   006f
+0b9a   0075
+0b9b   0072
+0b9c   0000
+0b9d   0020   dt " U = minUte";
+0b9e   0055
+0b9f   0020
+0ba0   003d
+0ba1   0020
+0ba2   006d
+0ba3   0069
+0ba4   006e
+0ba5   0055
+0ba6   0074
+0ba7   0065
+0ba8   0000
+0ba9   0020   dt " S = Sec";
+0baa   0053
+0bab   0020
+0bac   003d
+0bad   0020
+0bae   0053
+0baf   0065
+0bb0   0063
+0bb1   0000
+0bb2   0020   dt " k = display clock ";
+0bb3   006b
+0bb4   0020
+0bb5   003d
+0bb6   0020
+0bb7   0064
+0bb8   0069
+0bb9   0073
+0bba   0070
+0bbb   006c
+0bbc   0061
+0bbd   0079
+0bbe   0020
+0bbf   0063
+0bc0   006c
+0bc1   006f
+0bc2   0063
+0bc3   006b
+0bc4   0020
+0bc5   0000
+0bc6   0000   dt "";
+0bc7   0020   dt " R = target Reset";
+0bc8   0052
+0bc9   0020
+0bca   003d
+0bcb   0020
+0bcc   0074
+0bcd   0061
+0bce   0072
+0bcf   0067
+0bd0   0065
+0bd1   0074
+0bd2   0020
+0bd3   0052
+0bd4   0065
+0bd5   0073
+0bd6   0065
+0bd7   0074
+0bd8   0000
+0bd9   0020   dt " W = Write protect (2 or 0)";
+0bda   0057
+0bdb   0020
+0bdc   003d
+0bdd   0020
+0bde   0057
+0bdf   0072
+0be0   0069
+0be1   0074
+0be2   0065
+0be3   0020
+0be4   0070
+0be5   0072
+0be6   006f
+0be7   0074
+0be8   0065
+0be9   0063
+0bea   0074
+0beb   0020
+0bec   0028
+0bed   0032
+0bee   0020
+0bef   006f
+0bf0   0072
+0bf1   0020
+0bf2   0030
+0bf3   0029
+0bf4   0000
+0bf5   0020   dt " v = display variables";
+0bf6   0076
+0bf7   0020
+0bf8   003d
+0bf9   0020
+0bfa   0064
+0bfb   0069
+0bfc   0073
+0bfd   0070
+0bfe   006c
+0bff   0061
+0c00   0079
+0c01   0020
+0c02   0076
+0c03   0061
+0c04   0072
+0c05   0069
+0c06   0061
+0c07   0062
+0c08   006c
+0c09   0065
+0c0a   0073
+0c0b   0000
+0c0c   0020   dt " x = exit";
+0c0d   0078
+0c0e   0020
+0c0f   003d
+0c10   0020
+0c11   0065
+0c12   0078
+0c13   0069
+0c14   0074
+0c15   0000
+0c16   007c   dt "|||";
+0c17   007c
+0c18   007c
+0c19   0000
+0c1a   0003   dw ETX;
+0c1b   007c   appset_m:dt "|Application|";
+0c1c   0041
+0c1d   0070
+0c1e   0070
+0c1f   006c
+0c20   0069
+0c21   0063
+0c22   0061
+0c23   0074
+0c24   0069
+0c25   006f
+0c26   006e
+0c27   007c
+0c28   0000
+0c29   0020   dt " a = run myapp once";
+0c2a   0061
+0c2b   0020
+0c2c   003d
+0c2d   0020
+0c2e   0072
+0c2f   0075
+0c30   006e
+0c31   0020
+0c32   006d
+0c33   0079
+0c34   0061
+0c35   0070
+0c36   0070
+0c37   0020
+0c38   006f
+0c39   006e
+0c3a   0063
+0c3b   0065
+0c3c   0000
+0c3d   0000   dt "";
+0c3e   0020   dt " 1 = set int RAM buff_length,buff_addr";
+0c3f   0031
+0c40   0020
+0c41   003d
+0c42   0020
+0c43   0073
+0c44   0065
+0c45   0074
+0c46   0020
+0c47   0069
+0c48   006e
+0c49   0074
+0c4a   0020
+0c4b   0052
+0c4c   0041
+0c4d   004d
+0c4e   0020
+0c4f   0062
+0c50   0075
+0c51   0066
+0c52   0066
+0c53   005f
+0c54   006c
+0c55   0065
+0c56   006e
+0c57   0067
+0c58   0074
+0c59   0068
+0c5a   002c
+0c5b   0062
+0c5c   0075
+0c5d   0066
+0c5e   0066
+0c5f   005f
+0c60   0061
+0c61   0064
+0c62   0064
+0c63   0072
+0c64   0000
+0c65   0020   dt " 2 = set ext RAM page and address";
+0c66   0032
+0c67   0020
+0c68   003d
+0c69   0020
+0c6a   0073
+0c6b   0065
+0c6c   0074
+0c6d   0020
+0c6e   0065
+0c6f   0078
+0c70   0074
+0c71   0020
+0c72   0052
+0c73   0041
+0c74   004d
+0c75   0020
+0c76   0070
+0c77   0061
+0c78   0067
+0c79   0065
+0c7a   0020
+0c7b   0061
+0c7c   006e
+0c7d   0064
+0c7e   0020
+0c7f   0061
+0c80   0064
+0c81   0064
+0c82   0072
+0c83   0065
+0c84   0073
+0c85   0073
+0c86   0000
+0c87   0020   dt " S = Save buffer";
+0c88   0053
+0c89   0020
+0c8a   003d
+0c8b   0020
+0c8c   0053
+0c8d   0061
+0c8e   0076
+0c8f   0065
+0c90   0020
+0c91   0062
+0c92   0075
+0c93   0066
+0c94   0066
+0c95   0065
+0c96   0072
+0c97   0000
+0c98   0020   dt " R = Restore buffer";
+0c99   0052
+0c9a   0020
+0c9b   003d
+0c9c   0020
+0c9d   0052
+0c9e   0065
+0c9f   0073
+0ca0   0074
+0ca1   006f
+0ca2   0072
+0ca3   0065
+0ca4   0020
+0ca5   0062
+0ca6   0075
+0ca7   0066
+0ca8   0066
+0ca9   0065
+0caa   0072
+0cab   0000
+0cac   0000   dt "";
+0cad   0020   dt " d = dump buff_addr";
+0cae   0064
+0caf   0020
+0cb0   003d
+0cb1   0020
+0cb2   0064
+0cb3   0075
+0cb4   006d
+0cb5   0070
+0cb6   0020
+0cb7   0062
+0cb8   0075
+0cb9   0066
+0cba   0066
+0cbb   005f
+0cbc   0061
+0cbd   0064
+0cbe   0064
+0cbf   0072
+0cc0   0000
+0cc1   0020   dt " r = Read all registers";
+0cc2   0072
+0cc3   0020
+0cc4   003d
+0cc5   0020
+0cc6   0052
+0cc7   0065
+0cc8   0061
+0cc9   0064
+0cca   0020
+0ccb   0061
+0ccc   006c
+0ccd   006c
+0cce   0020
+0ccf   0072
+0cd0   0065
+0cd1   0067
+0cd2   0069
+0cd3   0073
+0cd4   0074
+0cd5   0065
+0cd6   0072
+0cd7   0073
+0cd8   0000
+0cd9   0020   dt " v = display variables";
+0cda   0076
+0cdb   0020
+0cdc   003d
+0cdd   0020
+0cde   0064
+0cdf   0069
+0ce0   0073
+0ce1   0070
+0ce2   006c
+0ce3   0061
+0ce4   0079
+0ce5   0020
+0ce6   0076
+0ce7   0061
+0ce8   0072
+0ce9   0069
+0cea   0061
+0ceb   0062
+0cec   006c
+0ced   0065
+0cee   0073
+0cef   0000
+0cf0   0000   dt "";
+0cf1   0020   dt " k = display clock ";
+0cf2   006b
+0cf3   0020
+0cf4   003d
+0cf5   0020
+0cf6   0064
+0cf7   0069
+0cf8   0073
+0cf9   0070
+0cfa   006c
+0cfb   0061
+0cfc   0079
+0cfd   0020
+0cfe   0063
+0cff   006c
+0d00   006f
+0d01   0063
+0d02   006b
+0d03   0020
+0d04   0000
+0d05   0020   dt " h = HELP";
+0d06   0068
+0d07   0020
+0d08   003d
+0d09   0020
+0d0a   0048
+0d0b   0045
+0d0c   004c
+0d0d   0050
+0d0e   0000
+0d0f   0020   dt " x = exit";
+0d10   0078
+0d11   0020
+0d12   003d
+0d13   0020
+0d14   0065
+0d15   0078
+0d16   0069
+0d17   0074
+0d18   0000
+0d19   007c   dt "|||";
+0d1a   007c
+0d1b   007c
+0d1c   0000
+0d1d   0003   dw ETX;
+0d1e   007c   help_a: dt "| H E L P |";
+0d1f   0020
+0d20   0048
+0d21   0020
+0d22   0045
+0d23   0020
+0d24   004c
+0d25   0020
+0d26   0050
+0d27   0020
+0d28   007c
+0d29   0000
+0d2a   0020   dt " Space key will refresh the screen";
+0d2b   0053
+0d2c   0070
+0d2d   0061
+0d2e   0063
+0d2f   0065
+0d30   0020
+0d31   006b
+0d32   0065
+0d33   0079
+0d34   0020
+0d35   0077
+0d36   0069
+0d37   006c
+0d38   006c
+0d39   0020
+0d3a   0072
+0d3b   0065
+0d3c   0066
+0d3d   0072
+0d3e   0065
+0d3f   0073
+0d40   0068
+0d41   0020
+0d42   0074
+0d43   0068
+0d44   0065
+0d45   0020
+0d46   0073
+0d47   0063
+0d48   0072
+0d49   0065
+0d4a   0065
+0d4b   006e
+0d4c   0000
+0d4d   0020   dt " Enter x to exit (previous menu)";
+0d4e   0045
+0d4f   006e
+0d50   0074
+0d51   0065
+0d52   0072
+0d53   0020
+0d54   0078
+0d55   0020
+0d56   0074
+0d57   006f
+0d58   0020
+0d59   0065
+0d5a   0078
+0d5b   0069
+0d5c   0074
+0d5d   0020
+0d5e   0028
+0d5f   0070
+0d60   0072
+0d61   0065
+0d62   0076
+0d63   0069
+0d64   006f
+0d65   0075
+0d66   0073
+0d67   0020
+0d68   006d
+0d69   0065
+0d6a   006e
+0d6b   0075
+0d6c   0029
+0d6d   0000
+0d6e   0020   dt " Enter values in HEXADECIMAL (0-9, a-f)";
+0d6f   0045
+0d70   006e
+0d71   0074
+0d72   0065
+0d73   0072
+0d74   0020
+0d75   0076
+0d76   0061
+0d77   006c
+0d78   0075
+0d79   0065
+0d7a   0073
+0d7b   0020
+0d7c   0069
+0d7d   006e
+0d7e   0020
+0d7f   0048
+0d80   0045
+0d81   0058
+0d82   0041
+0d83   0044
+0d84   0045
+0d85   0043
+0d86   0049
+0d87   004d
+0d88   0041
+0d89   004c
+0d8a   0020
+0d8b   0028
+0d8c   0030
+0d8d   002d
+0d8e   0039
+0d8f   002c
+0d90   0020
+0d91   0061
+0d92   002d
+0d93   0066
+0d94   0029
+0d95   0000
+0d96   0000   dt "";
+0d97   007c   dt "| Commands |";
+0d98   0020
+0d99   0043
+0d9a   006f
+0d9b   006d
+0d9c   006d
+0d9d   0061
+0d9e   006e
+0d9f   0064
+0da0   0073
+0da1   0020
+0da2   007c
+0da3   0000
+0da4   0003   dw ETX;
+0da5   007c   help_m: dt "| H E L P |";
+0da6   0020
+0da7   0048
+0da8   0020
+0da9   0045
+0daa   0020
+0dab   004c
+0dac   0020
+0dad   0050
+0dae   0020
+0daf   007c
+0db0   0000
+0db1   0020   dt " Space key will refresh the screen";
+0db2   0053
+0db3   0070
+0db4   0061
+0db5   0063
+0db6   0065
+0db7   0020
+0db8   006b
+0db9   0065
+0dba   0079
+0dbb   0020
+0dbc   0077
+0dbd   0069
+0dbe   006c
+0dbf   006c
+0dc0   0020
+0dc1   0072
+0dc2   0065
+0dc3   0066
+0dc4   0072
+0dc5   0065
+0dc6   0073
+0dc7   0068
+0dc8   0020
+0dc9   0074
+0dca   0068
+0dcb   0065
+0dcc   0020
+0dcd   0073
+0dce   0063
+0dcf   0072
+0dd0   0065
+0dd1   0065
+0dd2   006e
+0dd3   0000
+0dd4   0020   dt " Enter x to exit (previous menu)";
+0dd5   0045
+0dd6   006e
+0dd7   0074
+0dd8   0065
+0dd9   0072
+0dda   0020
+0ddb   0078
+0ddc   0020
+0ddd   0074
+0dde   006f
+0ddf   0020
+0de0   0065
+0de1   0078
+0de2   0069
+0de3   0074
+0de4   0020
+0de5   0028
+0de6   0070
+0de7   0072
+0de8   0065
+0de9   0076
+0dea   0069
+0deb   006f
+0dec   0075
+0ded   0073
+0dee   0020
+0def   006d
+0df0   0065
+0df1   006e
+0df2   0075
+0df3   0029
+0df4   0000
+0df5   0020   dt " Enter values in HEXADECIMAL";
+0df6   0045
+0df7   006e
+0df8   0074
+0df9   0065
+0dfa   0072
+0dfb   0020
+0dfc   0076
+0dfd   0061
+0dfe   006c
+0dff   0075
+0e00   0065
+0e01   0073
+0e02   0020
+0e03   0069
+0e04   006e
+0e05   0020
+0e06   0048
+0e07   0045
+0e08   0058
+0e09   0041
+0e0a   0044
+0e0b   0045
+0e0c   0043
+0e0d   0049
+0e0e   004d
+0e0f   0041
+0e10   004c
+0e11   0000
+0e12   0000   dt "";
+0e13   007c   dt "| Memory Commands |";
+0e14   0020
+0e15   004d
+0e16   0065
+0e17   006d
+0e18   006f
+0e19   0072
+0e1a   0079
+0e1b   0020
+0e1c   0043
+0e1d   006f
+0e1e   006d
+0e1f   006d
+0e20   0061
+0e21   006e
+0e22   0064
+0e23   0073
+0e24   0020
+0e25   007c
+0e26   0000
+0e27   0020   dt " A = Memory access (toggle)";
+0e28   0041
+0e29   0020
+0e2a   003d
+0e2b   0020
+0e2c   004d
+0e2d   0065
+0e2e   006d
+0e2f   006f
+0e30   0072
+0e31   0079
+0e32   0020
+0e33   0061
+0e34   0063
+0e35   0063
+0e36   0065
+0e37   0073
+0e38   0073
+0e39   0020
+0e3a   0028
+0e3b   0074
+0e3c   006f
+0e3d   0067
+0e3e   0067
+0e3f   006c
+0e40   0065
+0e41   0029
+0e42   0000
+0e43   0020   dt " B = Memory byte mode (toggle)";
+0e44   0042
+0e45   0020
+0e46   003d
+0e47   0020
+0e48   004d
+0e49   0065
+0e4a   006d
+0e4b   006f
+0e4c   0072
+0e4d   0079
+0e4e   0020
+0e4f   0062
+0e50   0079
+0e51   0074
+0e52   0065
+0e53   0020
+0e54   006d
+0e55   006f
+0e56   0064
+0e57   0065
+0e58   0020
+0e59   0028
+0e5a   0074
+0e5b   006f
+0e5c   0067
+0e5d   0067
+0e5e   006c
+0e5f   0065
+0e60   0029
+0e61   0000
+0e62   0020   dt " m = Memory read/write: (MEM ADDR)";
+0e63   006d
+0e64   0020
+0e65   003d
+0e66   0020
+0e67   004d
+0e68   0065
+0e69   006d
+0e6a   006f
+0e6b   0072
+0e6c   0079
+0e6d   0020
+0e6e   0072
+0e6f   0065
+0e70   0061
+0e71   0064
+0e72   002f
+0e73   0077
+0e74   0072
+0e75   0069
+0e76   0074
+0e77   0065
+0e78   003a
+0e79   0020
+0e7a   0028
+0e7b   004d
+0e7c   0045
+0e7d   004d
+0e7e   0020
+0e7f   0041
+0e80   0044
+0e81   0044
+0e82   0052
+0e83   0029
+0e84   0000
+0e85   0020   dt " ___ [m]addr[RET] read and set address" ;
+0e86   005f
+0e87   005f
+0e88   005f
+0e89   0020
+0e8a   005b
+0e8b   006d
+0e8c   005d
+0e8d   0061
+0e8e   0064
+0e8f   0064
+0e90   0072
+0e91   005b
+0e92   0052
+0e93   0045
+0e94   0054
+0e95   005d
+0e96   0020
+0e97   0072
+0e98   0065
+0e99   0061
+0e9a   0064
+0e9b   0020
+0e9c   0061
+0e9d   006e
+0e9e   0064
+0e9f   0020
+0ea0   0073
+0ea1   0065
+0ea2   0074
+0ea3   0020
+0ea4   0061
+0ea5   0064
+0ea6   0064
+0ea7   0072
+0ea8   0065
+0ea9   0073
+0eaa   0073
+0eab   0000
+0eac   0020   dt " ___ [m]addr,val[RET] write value" ;
+0ead   005f
+0eae   005f
+0eaf   005f
+0eb0   0020
+0eb1   005b
+0eb2   006d
+0eb3   005d
+0eb4   0061
+0eb5   0064
+0eb6   0064
+0eb7   0072
+0eb8   002c
+0eb9   0076
+0eba   0061
+0ebb   006c
+0ebc   005b
+0ebd   0052
+0ebe   0045
+0ebf   0054
+0ec0   005d
+0ec1   0020
+0ec2   0077
+0ec3   0072
+0ec4   0069
+0ec5   0074
+0ec6   0065
+0ec7   0020
+0ec8   0076
+0ec9   0061
+0eca   006c
+0ecb   0075
+0ecc   0065
+0ecd   0000
+0ece   0020   dt " d = dump memory from address 0";
+0ecf   0064
+0ed0   0020
+0ed1   003d
+0ed2   0020
+0ed3   0064
+0ed4   0075
+0ed5   006d
+0ed6   0070
+0ed7   0020
+0ed8   006d
+0ed9   0065
+0eda   006d
+0edb   006f
+0edc   0072
+0edd   0079
+0ede   0020
+0edf   0066
+0ee0   0072
+0ee1   006f
+0ee2   006d
+0ee3   0020
+0ee4   0061
+0ee5   0064
+0ee6   0064
+0ee7   0072
+0ee8   0065
+0ee9   0073
+0eea   0073
+0eeb   0020
+0eec   0030
+0eed   0000
+0eee   0020   dt " n = next 256 memory from last address";
+0eef   006e
+0ef0   0020
+0ef1   003d
+0ef2   0020
+0ef3   006e
+0ef4   0065
+0ef5   0078
+0ef6   0074
+0ef7   0020
+0ef8   0032
+0ef9   0035
+0efa   0036
+0efb   0020
+0efc   006d
+0efd   0065
+0efe   006d
+0eff   006f
+0f00   0072
+0f01   0079
+0f02   0020
+0f03   0066
+0f04   0072
+0f05   006f
+0f06   006d
+0f07   0020
+0f08   006c
+0f09   0061
+0f0a   0073
+0f0b   0074
+0f0c   0020
+0f0d   0061
+0f0e   0064
+0f0f   0064
+0f10   0072
+0f11   0065
+0f12   0073
+0f13   0073
+0f14   0000
+0f15   0020   dt " f = fill memory with value + increment";
+0f16   0066
+0f17   0020
+0f18   003d
+0f19   0020
+0f1a   0066
+0f1b   0069
+0f1c   006c
+0f1d   006c
+0f1e   0020
+0f1f   006d
+0f20   0065
+0f21   006d
+0f22   006f
+0f23   0072
+0f24   0079
+0f25   0020
+0f26   0077
+0f27   0069
+0f28   0074
+0f29   0068
+0f2a   0020
+0f2b   0076
+0f2c   0061
+0f2d   006c
+0f2e   0075
+0f2f   0065
+0f30   0020
+0f31   002b
+0f32   0020
+0f33   0069
+0f34   006e
+0f35   0063
+0f36   0072
+0f37   0065
+0f38   006d
+0f39   0065
+0f3a   006e
+0f3b   0074
+0f3c   0000
+0f3d   0020   dt " ___ addr,value = aaaa,vvvv (comma or space)";
+0f3e   005f
+0f3f   005f
+0f40   005f
+0f41   0020
+0f42   0061
+0f43   0064
+0f44   0064
+0f45   0072
+0f46   002c
+0f47   0076
+0f48   0061
+0f49   006c
+0f4a   0075
+0f4b   0065
+0f4c   0020
+0f4d   003d
+0f4e   0020
+0f4f   0061
+0f50   0061
+0f51   0061
+0f52   0061
+0f53   002c
+0f54   0076
+0f55   0076
+0f56   0076
+0f57   0076
+0f58   0020
+0f59   0028
+0f5a   0063
+0f5b   006f
+0f5c   006d
+0f5d   006d
+0f5e   0061
+0f5f   0020
+0f60   006f
+0f61   0072
+0f62   0020
+0f63   0073
+0f64   0070
+0f65   0061
+0f66   0063
+0f67   0065
+0f68   0029
+0f69   0000
+0f6a   0020   dt " l = memory length and increment";
+0f6b   006c
+0f6c   0020
+0f6d   003d
+0f6e   0020
+0f6f   006d
+0f70   0065
+0f71   006d
+0f72   006f
+0f73   0072
+0f74   0079
+0f75   0020
+0f76   006c
+0f77   0065
+0f78   006e
+0f79   0067
+0f7a   0074
+0f7b   0068
+0f7c   0020
+0f7d   0061
+0f7e   006e
+0f7f   0064
+0f80   0020
+0f81   0069
+0f82   006e
+0f83   0063
+0f84   0072
+0f85   0065
+0f86   006d
+0f87   0065
+0f88   006e
+0f89   0074
+0f8a   0000
+0f8b   0020   dt " ___ length,increment = llll,iiii (comma or space)";
+0f8c   005f
+0f8d   005f
+0f8e   005f
+0f8f   0020
+0f90   006c
+0f91   0065
+0f92   006e
+0f93   0067
+0f94   0074
+0f95   0068
+0f96   002c
+0f97   0069
+0f98   006e
+0f99   0063
+0f9a   0072
+0f9b   0065
+0f9c   006d
+0f9d   0065
+0f9e   006e
+0f9f   0074
+0fa0   0020
+0fa1   003d
+0fa2   0020
+0fa3   006c
+0fa4   006c
+0fa5   006c
+0fa6   006c
+0fa7   002c
+0fa8   0069
+0fa9   0069
+0faa   0069
+0fab   0069
+0fac   0020
+0fad   0028
+0fae   0063
+0faf   006f
+0fb0   006d
+0fb1   006d
+0fb2   0061
+0fb3   0020
+0fb4   006f
+0fb5   0072
+0fb6   0020
+0fb7   0073
+0fb8   0070
+0fb9   0061
+0fba   0063
+0fbb   0065
+0fbc   0029
+0fbd   0000
+0fbe   0020   dt " ___ aaaa,vvvv,llll,iiii mandatory 4 digits";
+0fbf   005f
+0fc0   005f
+0fc1   005f
+0fc2   0020
+0fc3   0061
+0fc4   0061
+0fc5   0061
+0fc6   0061
+0fc7   002c
+0fc8   0076
+0fc9   0076
+0fca   0076
+0fcb   0076
+0fcc   002c
+0fcd   006c
+0fce   006c
+0fcf   006c
+0fd0   006c
+0fd1   002c
+0fd2   0069
+0fd3   0069
+0fd4   0069
+0fd5   0069
+0fd6   0020
+0fd7   006d
+0fd8   0061
+0fd9   006e
+0fda   0064
+0fdb   0061
+0fdc   0074
+0fdd   006f
+0fde   0072
+0fdf   0079
+0fe0   0020
+0fe1   0034
+0fe2   0020
+0fe3   0064
+0fe4   0069
+0fe5   0067
+0fe6   0069
+0fe7   0074
+0fe8   0073
+0fe9   0000
+0fea   0000   dt "";
+0feb   007c   dt "| Register Commands |";
+0fec   0020
+0fed   0052
+0fee   0065
+0fef   0067
+0ff0   0069
+0ff1   0073
+0ff2   0074
+0ff3   0065
+0ff4   0072
+0ff5   0020
+0ff6   0043
+0ff7   006f
+0ff8   006d
+0ff9   006d
+0ffa   0061
+0ffb   006e
+0ffc   0064
+0ffd   0073
+0ffe   0020
+0fff   007c
+1000   0000
+1001   0020   dt " w = Write Output Port/Register: (full address)";
+1002   0077
+1003   0020
+1004   003d
+1005   0020
+1006   0057
+1007   0072
+1008   0069
+1009   0074
+100a   0065
+100b   0020
+100c   004f
+100d   0075
+100e   0074
+100f   0070
+1010   0075
+1011   0074
+1012   0020
+1013   0050
+1014   006f
+1015   0072
+1016   0074
+1017   002f
+1018   0052
+1019   0065
+101a   0067
+101b   0069
+101c   0073
+101d   0074
+101e   0065
+101f   0072
+1020   003a
+1021   0020
+1022   0028
+1023   0066
+1024   0075
+1025   006c
+1026   006c
+1027   0020
+1028   0061
+1029   0064
+102a   0064
+102b   0072
+102c   0065
+102d   0073
+102e   0073
+102f   0029
+1030   0000
+1031   0020   dt " ___ [w]addr[RET] read port";
+1032   005f
+1033   005f
+1034   005f
+1035   0020
+1036   005b
+1037   0077
+1038   005d
+1039   0061
+103a   0064
+103b   0064
+103c   0072
+103d   005b
+103e   0052
+103f   0045
+1040   0054
+1041   005d
+1042   0020
+1043   0072
+1044   0065
+1045   0061
+1046   0064
+1047   0020
+1048   0070
+1049   006f
+104a   0072
+104b   0074
+104c   0000
+104d   0020   dt " ___ [w]addr,val[RET] delimeter comma";
+104e   005f
+104f   005f
+1050   005f
+1051   0020
+1052   005b
+1053   0077
+1054   005d
+1055   0061
+1056   0064
+1057   0064
+1058   0072
+1059   002c
+105a   0076
+105b   0061
+105c   006c
+105d   005b
+105e   0052
+105f   0045
+1060   0054
+1061   005d
+1062   0020
+1063   0064
+1064   0065
+1065   006c
+1066   0069
+1067   006d
+1068   0065
+1069   0074
+106a   0065
+106b   0072
+106c   0020
+106d   0063
+106e   006f
+106f   006d
+1070   006d
+1071   0061
+1072   0000
+1073   0020   dt " ___ [w]addr val[RET] delimiter space";
+1074   005f
+1075   005f
+1076   005f
+1077   0020
+1078   005b
+1079   0077
+107a   005d
+107b   0061
+107c   0064
+107d   0064
+107e   0072
+107f   0020
+1080   0076
+1081   0061
+1082   006c
+1083   005b
+1084   0052
+1085   0045
+1086   0054
+1087   005d
+1088   0020
+1089   0064
+108a   0065
+108b   006c
+108c   0069
+108d   006d
+108e   0069
+108f   0074
+1090   0065
+1091   0072
+1092   0020
+1093   0073
+1094   0070
+1095   0061
+1096   0063
+1097   0065
+1098   0000
+1099   0020   dt " ___ [w]addr'n'val[RET] one's complement";
+109a   005f
+109b   005f
+109c   005f
+109d   0020
+109e   005b
+109f   0077
+10a0   005d
+10a1   0061
+10a2   0064
+10a3   0064
+10a4   0072
+10a5   0027
+10a6   006e
+10a7   0027
+10a8   0076
+10a9   0061
+10aa   006c
+10ab   005b
+10ac   0052
+10ad   0045
+10ae   0054
+10af   005d
+10b0   0020
+10b1   006f
+10b2   006e
+10b3   0065
+10b4   0027
+10b5   0073
+10b6   0020
+10b7   0063
+10b8   006f
+10b9   006d
+10ba   0070
+10bb   006c
+10bc   0065
+10bd   006d
+10be   0065
+10bf   006e
+10c0   0074
+10c1   0000
+10c2   0020   dt " ___ [w]addr'-'val[RET] two's complement";
+10c3   005f
+10c4   005f
+10c5   005f
+10c6   0020
+10c7   005b
+10c8   0077
+10c9   005d
+10ca   0061
+10cb   0064
+10cc   0064
+10cd   0072
+10ce   0027
+10cf   002d
+10d0   0027
+10d1   0076
+10d2   0061
+10d3   006c
+10d4   005b
+10d5   0052
+10d6   0045
+10d7   0054
+10d8   005d
+10d9   0020
+10da   0074
+10db   0077
+10dc   006f
+10dd   0027
+10de   0073
+10df   0020
+10e0   0063
+10e1   006f
+10e2   006d
+10e3   0070
+10e4   006c
+10e5   0065
+10e6   006d
+10e7   0065
+10e8   006e
+10e9   0074
+10ea   0000
+10eb   0000   dt "";
+10ec   005b   dt "[s/c/t/i]regaddr,bit[RET] (bit=0 to F)";
+10ed   0073
+10ee   002f
+10ef   0063
+10f0   002f
+10f1   0074
+10f2   002f
+10f3   0069
+10f4   005d
+10f5   0072
+10f6   0065
+10f7   0067
+10f8   0061
+10f9   0064
+10fa   0064
+10fb   0072
+10fc   002c
+10fd   0062
+10fe   0069
+10ff   0074
+1100   005b
+1101   0052
+1102   0045
+1103   0054
+1104   005d
+1105   0020
+1106   0028
+1107   0062
+1108   0069
+1109   0074
+110a   003d
+110b   0030
+110c   0020
+110d   0074
+110e   006f
+110f   0020
+1110   0046
+1111   0029
+1112   0000
+1113   005b   dt "[a/o/e] regaddr,mask[RET]";
+1114   0061
+1115   002f
+1116   006f
+1117   002f
+1118   0065
+1119   005d
+111a   0020
+111b   0072
+111c   0065
+111d   0067
+111e   0061
+111f   0064
+1120   0064
+1121   0072
+1122   002c
+1123   006d
+1124   0061
+1125   0073
+1126   006b
+1127   005b
+1128   0052
+1129   0045
+112a   0054
+112b   005d
+112c   0000
+112d   0000   dt "";
+112e   0020   dt " b = set register Base address";
+112f   0062
+1130   0020
+1131   003d
+1132   0020
+1133   0073
+1134   0065
+1135   0074
+1136   0020
+1137   0072
+1138   0065
+1139   0067
+113a   0069
+113b   0073
+113c   0074
+113d   0065
+113e   0072
+113f   0020
+1140   0042
+1141   0061
+1142   0073
+1143   0065
+1144   0020
+1145   0061
+1146   0064
+1147   0064
+1148   0072
+1149   0065
+114a   0073
+114b   0073
+114c   0000
+114d   0020   dt " r = Read 16 Registers(BASE ADDR + 0 to F)";
+114e   0072
+114f   0020
+1150   003d
+1151   0020
+1152   0052
+1153   0065
+1154   0061
+1155   0064
+1156   0020
+1157   0031
+1158   0036
+1159   0020
+115a   0052
+115b   0065
+115c   0067
+115d   0069
+115e   0073
+115f   0074
+1160   0065
+1161   0072
+1162   0073
+1163   0028
+1164   0042
+1165   0041
+1166   0053
+1167   0045
+1168   0020
+1169   0041
+116a   0044
+116b   0044
+116c   0052
+116d   0020
+116e   002b
+116f   0020
+1170   0030
+1171   0020
+1172   0074
+1173   006f
+1174   0020
+1175   0046
+1176   0029
+1177   0000
+1178   007c   dt "|||";
+1179   007c
+117a   007c
+117b   0000
+117c   0003   dw ETX;
+117d   117d   dw zend_code;
+117e   0000   memptr: dw 0 ; 
+117f   0000   memptrlast: dw 0 ; 
+1180   0000   hex1val: dw 0 ; 
+1181   0000   hex2val: dw 0 ; 
+1182   0000   cvalue1: dw 0 ; 
+1183   0000   cvalue2: dw 0 ; 
+1184   0000   inpchar: dw 0 ; 
+1185   0000   inpaddr: dw 0 ; 
+1186   0000   outdata: dw 0 ; 
+1187   0000   uartstat: dw 0 ; 
+1188   0077   bitop: dw "w" ;
+1189   0000   delimeter: dw 0 ;
+118a   0000   temp0: dw 0 ; 
+118b   0000   regptr: dw BASEREGIO ; 
+118c   0001   echomode: dw 1 ; 
+118d   11ed   buff_addr: dw tempvar1 ; 
+118e   000f   buff_len: dw 15 ; 
+118f   0000   buff_addrx: dw 0 ;
+1190   0000   buff_value: dw 0 ;
+1191   0000   buff_inc: dw 0 ;
+1192   0000   memode: dw 0 ; 
+1193   0000   memacc: dw 0 ; 
+1194   0000   dw 0 ; 
+1195   0000   tmr1msec: dw 0 ; 
+1196   0064   tmr1value: dw 100 ; 
+1197   0001   irqmask: dw 1 ; 
+1198   06ca   ssm_pst: dw kpst00 ; 
+1199   06ca   ssm_lst: dw kpst00 ; 
+119a   05b6   pjump: dw myapp ; 
+119b   0000   dw 0 ; 
+119c   0000   memop: dw 0 ; 
+119d   07e6   tmr1year: dw YEAR ; 
+119e   0001   tmr1month: dw MONTH ; 
+119f   0001   tmr1date: dw DATE ; 
+11a0   0000   tmr1hour: dw HOUR ; 
+11a1   0000   tmr1min: dw MINUTE ; 
+11a2   0000   tmr1sec: dw SECONDS ; 
+11a3   0000   dw 0 ; 
+11a4   0000   dw 0 ; 
+3f00   0046   cli ; 
+3f01   0000   nop ; 
+3f02   0000   nop ; 
+3f03   073f   boot_p: uport f7 ; 
+3f04   0121   ldrv r1,"<" ; 
+3f05   003c
+3f06   1a35   outpp r1,pA,0 ; 
+3f07   0000
+3f08   b133   boot_ch: inpp r1,pB ; 
+3f09   010b   andv r1,RXDVLD ; 
+3f0a   0080
+3f0b   1037   bra z,boot_ch ; 
+3f0c   fffc
+3f0d   a133   inpp r1,pA ; 
+3f0e   010b   andv r1,'h0FF ; 
+3f0f   00ff
+3f10   1113   cmprv r1,"#" ; 
+3f11   0023
+3f12   1037   bra e,boot_fh ; 
+3f13   0007
+3f14   1113   cmprv r1,ESC ; 
+3f15   001b
+3f16   9037   bra ne,boot_ch ; 
+3f17   fff1
+3f18   0039   jmp end_boot ; 
+3f19   3f55
+3f1a   073e   boot_fh: uflag f7 ; 
+3f1b   873f   uport t7 ; 
+3f1c   012e   boot_p0: ldpv p1,0 ;
+3f1d   0000
+3f1e   021f   boot_p1: ldcv c2,3 ;
+3f1f   0003
+3f20   220e   xor r2,r2 ; 
+3f21   0217   boot_p2: shl4 r2 ;
+3f22   b133   boot_p3: inpp r1,pB ; 
+3f23   010b   andv r1,RXDVLD ; 
+3f24   0080
+3f25   1037   bra z,boot_p3 ; 
+3f26   fffc
+3f27   a133   inpp r1,pA ; 
+3f28   010b   andv r1,'h0FF ; 
+3f29   00ff
+3f2a   0107   subv r1,'h030 ; 
+3f2b   0030
+3f2c   3037   bra s,boot_p3 ; 
+3f2d   fff5
+3f2e   1113   cmprv r1,9 ;
+3f2f   0009
+3f30   f037   bra ls,boot_p4 ;
+3f31   0005
+3f32   010b   andv r1,'h00F ; 
+3f33   000f
+3f34   0103   addv r1,9 ;
+3f35   0009
+3f36   120c   boot_p4: or r2,r1 ;
+3f37   0238   dcjnz c2,boot_p2 ;
+3f38   3f21
+3f39   0000   nop ; 
+3f3a   8739   jmp t7,boot_p4b ; 
+3f3b   3f42
+3f3c   2a19   mvrr r2,ra ; 
+3f3d   a028   str ra,prog_lng ; 
+3f3e   3f8e
+3f3f   873e   uflag t7 ; 
+3f40   0037   bra boot_p0 ;
+3f41   ffdb
+3f42   111b   boot_p4b:mvpr p1,r1 ; 
+3f43   1113   cmprv r1,boot_p ;
+3f44   3f03
+3f45   a037   bra hs,boot_p5 ;
+3f46   0004
+3f47   212b   strpi r2,p1 ; 
+3f48   0037   bra boot_p6 ;
+3f49   0005
+3f4a   0021   boot_p5: ldrv r0,"*" ;
+3f4b   002a
+3f4c   0037   bra boot_p7 ;
+3f4d   0003
+3f4e   0021   boot_p6: ldrv r0,"." ;
+3f4f   002e
+3f50   0a35   boot_p7: outpp r0,pA,0 ;
+3f51   0000
+3f52   0a11   dec ra ;
+3f53   9037   bra nz,boot_p1 ;
+3f54   ffca
+3f55   102f   end_boot:stp p1,prog_cnt ;
+3f56   3f8f
+3f57   0021   ldrv r0,"#" ;
+3f58   0023
+3f59   0a35   outpp r0,pA,0 ;
+3f5a   0000
+3f5b   0121   end_loop:ldrv r1,0 ; 
+3f5c   0000
+3f5d   073f   uport f7 ; 
+3f5e   0039   jmp reset_v ;
+3f5f   0000
+3f60   0c20   boot_r: ldr rc,prog_lng ;
+3f61   3f8e
+3f62   012e   ldpv p1,0 ;
+3f63   0000
+3f64   021f   boot_r1: ldcv c2,3 ;
+3f65   0003
+3f66   1224   ldrpi r2,p1 ;
+3f67   3215   boot_r2: shl r,r2 ;
+3f68   3215   shl r,r2 ;
+3f69   3215   shl r,r2 ;
+3f6a   3215   shl r,r2 ;
+3f6b   2119   mvrr r2,r1 ;
+3f6c   010b   andv r1,'h00F ;
+3f6d   000f
+3f6e   0103   addv r1,'h030 ;
+3f6f   0030
+3f70   1113   cmprv r1,'h039 ;
+3f71   0039
+3f72   f037   bra ls,boot_r3 ;
+3f73   0003
+3f74   0103   addv r1,'h027 ;
+3f75   0027
+3f76   b333   boot_r3: inpp r3,pB ; 
+3f77   030b   andv r3,TXFULL ; 
+3f78   0040
+3f79   9037   bra nz,boot_r3 ; 
+3f7a   fffc
+3f7b   1a35   outpp r1,pA,0 ;
+3f7c   0000
+3f7d   0238   dcjnz c2,boot_r2 ;
+3f7e   3f67
+3f7f   0000   nop ; 
+3f80   b333   boot_r4: inpp r3,pB ; 
+3f81   030b   andv r3,TXFULL ; 
+3f82   0040
+3f83   9037   bra nz,boot_r4 ; 
+3f84   fffc
+3f85   0321   ldrv r3,'h00A ;
+3f86   000a
+3f87   3a35   outpp r3,pA,0 ;
+3f88   0000
+3f89   0c11   dec rc ; 
+3f8a   9037   bra nz,boot_r1 ;
+3f8b   ffd9
+3f8c   0039   jmp end_loop ;
+3f8d   3f5b
+3f8e   0000   prog_lng:dw 0 ; 
+3f8f   0000   prog_cnt:dw 0 ; 
