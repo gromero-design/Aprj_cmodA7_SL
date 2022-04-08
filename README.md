@@ -1,0 +1,6 @@
+# Aprj_cmodA7_SL
+Addressable LED controller for WS2811/WS2812B , multichannel
+This project is a digital LED controller but it can be a template for other projects like motor control, robotics, drones or any generic programmable controller.
+The controller is based on an FPGA board, CMOD-A7 from Digilent, the FPGA part number is –Artix7-35T but also it will fit and work with an Artix7-15T.
+The controller can handle up to 16 independent LED strips up to 300 LEDs; it is a mix of high speed logic and a soft core 16 bits custom processor (Opus16) which receives commands from a serial interface.  The serial interface is an UART connected to either the on board USB port through an FTD232 chip or a Bluetooth device, BT-HC04, simple ASCII command characters are sent to the processor to select different tasks/routines inside the FPGA.
+The custom processor is programmed in Assembly language, it runs at 100MHz and it is close to a RISC processor. Also anyone with FPGA experience can replace the processor with any other, either internally soft core or hard core, or an external microcontroller. The advantage of using the custom Opus16 processor is that it is very simple to program in assembly code, there is no need for a separate software environment, and the code has a Boot loader to allow you to download a new program without the need for re-programming the FPGA. 
