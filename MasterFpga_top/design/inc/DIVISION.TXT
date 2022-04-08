@@ -1,0 +1,50 @@
+			R5 = NUMPIXELS
+			R4 = COLORCNT
+			JSR	DIVIDE
+			R6 = SEGMENTS
+			R3 = RESIDUAL
+			
+			// compute number of segments based on colorcnt
+computeseg:	ldr		r4,colorcnt		;
+			or		r4,r4			; // check for zero
+			bra		nz,computseg0	;
+			xor		r1,r1			; // ready2go flag
+			bra		computseg2		;
+computseg0:	ldrv	r1,1			;
+			ldr		r5,numpixels	;
+			jsr		division		;
+			str		r3,residual		; // residual = numpixels/colorseg
+computseg2:	str		r6,colorseg		;
+			str		r1,ready2go		;
+			rts						;		
+
+theme0:		uflag	f3				; // disable especial effects
+			jsr		computeseg		; // numpixels/colorcnt=segments
+			ldr		r1,ready2go		;
+			or		r1,r1			; // check if ready 
+			bra		z,theme0_4		; // no colors to display
+			// calculate buffer pointer
+theme0_0:	ldpv	p1,buf_table   	; // address
+			ldr		r1,channel		;
+			ldpy	p1,r1			; //
+			mvpr	p1,r1			; 
+			strx	r1,pD,0			; //debug reg
+			// setup register values
+			ldpv	p2,colorset		; // address
+			ldr		r4,numpixels	; // R4 number of pixels
+			------------------------;
+					
+				
+	// DIVISION
+	//		R6 = result  
+	//		R5 = numerator
+	//		R4 = denominator
+	//		R3 = residual
+division:	xor		r6,r6			; // clear result
+divstart:	sub		r5,r4			;
+			bra		s,divends   	;
+			mvrr	r5,r3      		; // residual = numpixels/colorseg
+			inc		r6				;
+			bra		divstart  		;
+divend:		rts						;		
+		
